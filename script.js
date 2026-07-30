@@ -574,6 +574,29 @@ function openCheckout() {
     document.getElementById('summaryDelivery').textContent = del ? 'Rs.' + del : 'FREE';
     document.getElementById('summaryTotal').textContent = 'Rs.' + (sub + del).toLocaleString();
     document.getElementById('summaryDiscountRow').style.display = 'none';
+    // openCheckout function mein
+// summaryDiscountRow ke baad yeh add karo:
+
+// Check if cart has china items
+var hasChinaItems = false;
+for (var ci = 0; ci < cart.length; ci++) {
+    var cp = products.find(function(x) { return x.id === cart[ci].id; });
+    if (cp && cp.shipFrom === 'china') { hasChinaItems = true; break; }
+}
+
+// Update payment method display
+var codBox = document.querySelector('.cod-box');
+if (codBox) {
+    if (hasChinaItems) {
+        codBox.innerHTML = '<input type="radio" id="cod" name="payment" checked><label for="cod"><i class="fas fa-credit-card" style="color:#E65100;"></i><div><strong>⚠️ Advance Payment Required</strong><p style="color:#E65100;margin:0;">China shipped items require advance payment. No COD available for China orders.</p><p style="color:var(--dn);font-weight:600;margin:4px 0 0;">Contact WhatsApp: 03XX-XXXXXXX for payment details</p></div></label>';
+        codBox.style.background = '#FFF3E0';
+        codBox.style.borderColor = '#FF7A00';
+    } else {
+        codBox.innerHTML = '<input type="radio" id="cod" name="payment" checked><label for="cod"><i class="fas fa-hand-holding-usd" style="color:#28a745;"></i><div><strong>Cash on Delivery (COD)</strong><p>Pay when you receive your order</p></div></label>';
+        codBox.style.background = '#E8F5E9';
+        codBox.style.borderColor = '#28a745';
+    }
+}
     document.getElementById('checkoutModal').classList.add('open');
     document.body.style.overflow = 'hidden';
 }
