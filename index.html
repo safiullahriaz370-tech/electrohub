@@ -405,7 +405,36 @@
         <button class="hero-arrow left" onclick="prevSlide()"><i class="fas fa-chevron-left"></i></button>
         <button class="hero-arrow right" onclick="nextSlide()"><i class="fas fa-chevron-right"></i></button>
     </section>
+<!-- SHIPPING TABS -->
+<section class="ship-tabs-section">
+    <div class="container">
+        <div class="ship-tabs">
+            <button class="ship-tab pak active" onclick="switchShipping('pakistan',this)">
+                <span class="ship-flag">🇵🇰</span>
+                <div class="ship-info">
+                    <h3>Pakistan Shipped</h3>
+                    <p>2-5 Days Delivery • Local Stock</p>
+                </div>
+                <span class="ship-badge pak-badge">Fast</span>
+            </button>
+            <button class="ship-tab china" onclick="switchShipping('china',this)">
+                <span class="ship-flag">🇨🇳</span>
+                <div class="ship-info">
+                    <h3>China Shipped</h3>
+                    <p>15-25 Days Delivery • Direct Import</p>
+                </div>
+                <span class="ship-badge china-badge">Cheap</span>
+            </button>
+        </div>
+    </div>
+</section>
 
+<!-- ACTIVE SHIPPING INDICATOR -->
+<div class="active-shipping" id="activeShipping">
+    <div class="container">
+        <span id="shippingIndicator">🇵🇰 Showing Pakistan Shipped Products</span>
+    </div>
+</div>
     <section class="trust-badges"><div class="container"><div class="badges-grid">
         <div class="badge-item"><i class="fas fa-truck"></i><div><h4>Free Delivery</h4><p>Over Rs. 2000</p></div></div>
         <div class="badge-item"><i class="fas fa-money-bill-wave"></i><div><h4>Cash on Delivery</h4><p>Pay on receive</p></div></div>
