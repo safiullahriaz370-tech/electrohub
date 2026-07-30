@@ -53,9 +53,42 @@ async function sbPatch(table, filter, data) {
 }
 
 // ===== CONSTANTS =====
-const CI = { chargers: 'fas fa-charging-station', cables: 'fas fa-plug', earphones: 'fas fa-headphones-alt', powerbanks: 'fas fa-battery-full', holders: 'fas fa-mobile-alt', watches: 'fas fa-clock', protectors: 'fas fa-shield-alt', covers: 'fas fa-tablet-alt', speakers: 'fas fa-volume-up', adapters: 'fas fa-exchange-alt' };
-const CN = { chargers: 'Chargers', cables: 'Cables', earphones: 'Earphones', powerbanks: 'Power Banks', holders: 'Phone Holders', watches: 'Smart Watches', protectors: 'Screen Protectors', covers: 'Mobile Covers', speakers: 'Bluetooth Speakers', adapters: 'Adapters' };
-const CPN = { all: 'All Devices', iphone: 'iPhone', samsung: 'Samsung', typec: 'Type-C', microusb: 'Micro USB', laptop: 'Laptop' };
+const CI = {
+    chargers: 'fas fa-charging-station',
+    cables: 'fas fa-plug',
+    earphones: 'fas fa-headphones-alt',
+    powerbanks: 'fas fa-battery-full',
+    holders: 'fas fa-mobile-alt',
+    watches: 'fas fa-clock',
+    protectors: 'fas fa-shield-alt',
+    covers: 'fas fa-tablet-alt',
+    speakers: 'fas fa-volume-up',
+    adapters: 'fas fa-exchange-alt',
+    lights: 'fas fa-lightbulb',
+    stands: 'fas fa-laptop',
+    keyboards: 'fas fa-keyboard',
+    storage: 'fas fa-hdd',
+    cameras: 'fas fa-camera',
+    other: 'fas fa-box'
+};
+const CN = {
+    chargers: 'Chargers',
+    cables: 'Cables',
+    earphones: 'Earphones',
+    powerbanks: 'Power Banks',
+    holders: 'Phone Holders',
+    watches: 'Smart Watches',
+    protectors: 'Screen Protectors',
+    covers: 'Mobile Covers',
+    speakers: 'Bluetooth Speakers',
+    adapters: 'Adapters',
+    lights: 'Ring Lights / LED',
+    stands: 'Laptop Stands',
+    keyboards: 'Keyboards / Mouse',
+    storage: 'USB / Storage',
+    cameras: 'Camera Accessories',
+    other: 'Other'
+};
 
 // ===== STATE =====
 let products = [];
