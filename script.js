@@ -118,16 +118,6 @@ async function loadProducts() {
     }
 }
 
-function getDefaults() {
-    return [
-        { id: 1, name: "Samsung 25W Fast Charger", category: "chargers", price: 1499, oldPrice: 2499, image: "", description: "Samsung 25W Super Fast Charger USB-C", brand: "Samsung", compat: "typec", stock: 50, rating: 4.5, reviews: 128, isNew: false, isHot: true, isSale: true },
-        { id: 2, name: "iPhone 20W USB-C Adapter", category: "chargers", price: 1999, oldPrice: 3499, image: "", description: "Apple 20W USB-C Power Adapter", brand: "Apple", compat: "iphone", stock: 35, rating: 4.7, reviews: 256, isNew: false, isHot: true, isSale: true },
-        { id: 3, name: "Anker 65W GaN Charger", category: "chargers", price: 3999, oldPrice: 5999, image: "", description: "Anker 65W GaN 3-port charger", brand: "Anker", compat: "all", stock: 20, rating: 4.8, reviews: 89, isNew: true, isHot: false, isSale: true },
-        { id: 4, name: "JBL Tune 230NC TWS", category: "earphones", price: 5499, oldPrice: 8999, image: "", description: "JBL Pure Bass ANC 40hr", brand: "JBL", compat: "all", stock: 30, rating: 4.6, reviews: 312, isNew: true, isHot: true, isSale: true },
-        { id: 5, name: "Anker PowerCore 20000mAh", category: "powerbanks", price: 3999, oldPrice: 5999, image: "", description: "22.5W fast charging", brand: "Anker", compat: "all", stock: 35, rating: 4.7, reviews: 523, isNew: false, isHot: true, isSale: true },
-        { id: 6, name: "Haylou Solar Plus RT3", category: "watches", price: 4999, oldPrice: 7499, image: "", description: "AMOLED 100+ sports", brand: "Haylou", compat: "all", stock: 30, rating: 4.4, reviews: 234, isNew: true, isHot: true, isSale: true }
-    ];
-}
 
 // ===== AUTH =====
 function openAuth(r) { if (r) sessionStorage.setItem('authRedirect', r); document.getElementById('authModal').classList.add('open'); document.body.style.overflow = 'hidden'; }
