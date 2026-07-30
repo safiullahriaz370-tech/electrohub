@@ -387,3 +387,228 @@ a{text-decoration:none;color:inherit}ul{list-style:none}img{max-width:100%}
     }
 }
 /* ===== BUY BUTTON FIX ===== */
+/* ===== SHIPPING TABS ===== */
+.ship-tabs-section {
+    background: var(--white);
+    padding: 20px 0;
+    border-bottom: 2px solid var(--gray);
+    position: sticky;
+    top: 107px;
+    z-index: 998;
+}
+
+.ship-tabs {
+    display: flex;
+    gap: 15px;
+}
+
+.ship-tab {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px 22px;
+    border: 3px solid var(--gray);
+    border-radius: 14px;
+    background: var(--white);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.ship-tab:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+.ship-tab::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+/* Pakistan Tab */
+.ship-tab.pak::before {
+    background: linear-gradient(135deg, #E8F5E9, #C8E6C9);
+}
+
+.ship-tab.pak.active {
+    border-color: #4CAF50;
+    box-shadow: 0 5px 20px rgba(76,175,80,0.2);
+}
+
+.ship-tab.pak.active::before {
+    opacity: 1;
+}
+
+/* China Tab */
+.ship-tab.china::before {
+    background: linear-gradient(135deg, #FFF3E0, #FFE0B2);
+}
+
+.ship-tab.china.active {
+    border-color: #FF7A00;
+    box-shadow: 0 5px 20px rgba(255,122,0,0.2);
+}
+
+.ship-tab.china.active::before {
+    opacity: 1;
+}
+
+.ship-flag {
+    font-size: 35px;
+    position: relative;
+    z-index: 1;
+}
+
+.ship-info {
+    flex: 1;
+    text-align: left;
+    position: relative;
+    z-index: 1;
+}
+
+.ship-info h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 3px;
+    color: var(--dark);
+}
+
+.ship-info p {
+    font-size: 12px;
+    color: var(--medium-gray);
+    margin: 0;
+}
+
+.ship-badge {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    position: relative;
+    z-index: 1;
+}
+
+.pak-badge {
+    background: #4CAF50;
+    color: white;
+}
+
+.china-badge {
+    background: #FF7A00;
+    color: white;
+}
+
+/* Active Shipping Indicator */
+.active-shipping {
+    padding: 8px 0;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: center;
+    transition: all 0.3s;
+}
+
+.active-shipping.pak-active {
+    background: linear-gradient(135deg, #E8F5E9, #C8E6C9);
+    color: #2E7D32;
+}
+
+.active-shipping.china-active {
+    background: linear-gradient(135deg, #FFF3E0, #FFE0B2);
+    color: #E65100;
+}
+
+/* Product Card Shipping Badge */
+.ship-from-badge {
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 700;
+    z-index: 2;
+}
+
+.ship-from-badge.pak {
+    background: #4CAF50;
+    color: white;
+}
+
+.ship-from-badge.china {
+    background: #FF7A00;
+    color: white;
+}
+
+/* Product Card Border Color */
+.product-card.pak-product {
+    border-color: #C8E6C9;
+}
+
+.product-card.pak-product:hover {
+    border-color: #4CAF50;
+    box-shadow: 0 5px 20px rgba(76,175,80,0.15);
+}
+
+.product-card.china-product {
+    border-color: #FFE0B2;
+}
+
+.product-card.china-product:hover {
+    border-color: #FF7A00;
+    box-shadow: 0 5px 20px rgba(255,122,0,0.15);
+}
+
+/* Section Headers Color Change */
+.section.pak-section .section-header h2 {
+    color: #2E7D32;
+}
+
+.section.pak-section .section-header h2 i {
+    color: #4CAF50;
+}
+
+.section.china-section .section-header h2 {
+    color: #E65100;
+}
+
+.section.china-section .section-header h2 i {
+    color: #FF7A00;
+}
+
+/* Flash Sale Color for Pakistan */
+.flash-sale.pak-flash {
+    background: linear-gradient(135deg, #E8F5E9, #C8E6C9);
+}
+
+.flash-sale.china-flash {
+    background: linear-gradient(135deg, #FFF3E6, #FFE0B2);
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .ship-tabs {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .ship-tab {
+        padding: 14px 16px;
+    }
+    .ship-flag {
+        font-size: 28px;
+    }
+    .ship-info h3 {
+        font-size: 14px;
+    }
+    .ship-tabs-section {
+        position: relative;
+        top: auto;
+    }
+}
