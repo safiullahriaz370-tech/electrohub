@@ -307,13 +307,25 @@
         <div class="header-content">
             <div class="logo" onclick="showPage('home')"><i class="fas fa-bolt"></i><span>Electro<strong>Hub</strong></span></div>
             <div class="search-bar">
-                <select id="searchCategory">
-                    <option value="all">All</option>
-                    <option value="chargers">Chargers</option><option value="cables">Cables</option>
-                    <option value="earphones">Earphones</option><option value="powerbanks">Power Banks</option>
-                    <option value="watches">Watches</option><option value="speakers">Speakers</option>
-                    <option value="covers">Covers</option><option value="adapters">Adapters</option>
-                </select>
+               <select id="searchCategory">
+    <option value="all">All</option>
+    <option value="chargers">Chargers</option>
+    <option value="cables">Cables</option>
+    <option value="earphones">Earphones</option>
+    <option value="powerbanks">Power Banks</option>
+    <option value="watches">Watches</option>
+    <option value="speakers">Speakers</option>
+    <option value="covers">Covers</option>
+    <option value="adapters">Adapters</option>
+    <option value="lights">Ring Lights</option>
+    <option value="stands">Stands</option>
+    <option value="keyboards">Keyboards</option>
+    <option value="storage">Storage</option>
+    <option value="cameras">Cameras</option>
+    <option value="holders">Holders</option>
+    <option value="protectors">Protectors</option>
+    <option value="other">Other</option>
+</select>
                 <input type="text" id="searchInput" placeholder="Search products..." onkeyup="handleSearch(event)">
                 <button onclick="searchProducts()"><i class="fas fa-search"></i></button>
             </div>
