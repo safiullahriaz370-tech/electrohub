@@ -265,20 +265,50 @@
                     <h4><i class="fas fa-edit"></i> <span id="formTitle">Add New Product</span></h4>
                     <div class="frow">
                         <div class="fgrp"><label>Product Name *</label><input type="text" id="fName" placeholder="Enter product name"></div>
-                        <div class="fgrp"><label>Category *</label>
-                            <select id="fCategory">
-                                <option value="chargers">⚡ Chargers</option>
-                                <option value="cables">🔌 Cables</option>
-                                <option value="earphones">🎧 Earphones</option>
-                                <option value="powerbanks">🔋 Power Banks</option>
-                                <option value="holders">📱 Phone Holders</option>
-                                <option value="watches">⌚ Smart Watches</option>
-                                <option value="protectors">🛡️ Screen Protectors</option>
-                                <option value="covers">📦 Mobile Covers</option>
-                                <option value="speakers">🔊 Bluetooth Speakers</option>
-                                <option value="adapters">🔄 Adapters</option>
-                            </select>
-                        </div>
+                   <div class="fgrp"><label>Category *</label>
+    <select id="fCategory">
+        <option value="chargers">⚡ Chargers</option>
+        <option value="cables">🔌 Cables</option>
+        <option value="earphones">🎧 Earphones / Earbuds</option>
+        <option value="powerbanks">🔋 Power Banks</option>
+        <option value="holders">📱 Phone Holders</option>
+        <option value="watches">⌚ Smart Watches</option>
+        <option value="protectors">🛡️ Screen Protectors</option>
+        <option value="covers">📦 Mobile Covers / Cases</option>
+        <option value="speakers">🔊 Bluetooth Speakers</option>
+        <option value="adapters">🔄 Adapters / Hubs</option>
+        <option value="lights">💡 Ring Lights / LED</option>
+        <option value="stands">🖥️ Laptop Stands</option>
+        <option value="keyboards">⌨️ Keyboards / Mouse</option>
+        <option value="storage">💾 USB / Storage</option>
+        <option value="cameras">📸 Camera Accessories</option>
+        <option value="other">📦 Other</option>
+    </select>
+</div>
+<div class="fgrp"><label>Brand *</label>
+    <select id="fBrandSelect" onchange="if(this.value==='custom'){document.getElementById('fBrand').style.display='block';document.getElementById('fBrand').value='';}else{document.getElementById('fBrand').style.display='none';document.getElementById('fBrand').value=this.value;}">
+        <option value="Generic">Generic</option>
+        <option value="Samsung">Samsung</option>
+        <option value="Apple">Apple</option>
+        <option value="Anker">Anker</option>
+        <option value="Baseus">Baseus</option>
+        <option value="JBL">JBL</option>
+        <option value="Xiaomi">Xiaomi</option>
+        <option value="Haylou">Haylou</option>
+        <option value="Ugreen">Ugreen</option>
+        <option value="Lenovo">Lenovo</option>
+        <option value="Realme">Realme</option>
+        <option value="OnePlus">OnePlus</option>
+        <option value="Sony">Sony</option>
+        <option value="Huawei">Huawei</option>
+        <option value="Joyroom">Joyroom</option>
+        <option value="Remax">Remax</option>
+        <option value="Ronin">Ronin</option>
+        <option value="Audionic">Audionic</option>
+        <option value="custom">✏️ Other (Type Name)</option>
+    </select>
+    <input type="text" id="fBrand" placeholder="Type brand name" style="display:none;margin-top:6px;">
+</div>
                     </div>
                     <div class="frow">
                         <div class="fgrp"><label>Price (Rs.) *</label><input type="number" id="fPrice" placeholder="e.g. 1499"></div>
