@@ -254,20 +254,28 @@ function pCard(p) {
 // ===== SHOP =====
 function renderShop(f) { let p = f || products; document.getElementById('productCount').textContent = p.length; rG('shopProducts', p); }
 function buildFilters() {
-    let cats = [...new Set(products.map(p => p.category))];
-    document.getElementById('categoryFilters').innerHTML = cats.map(c => '<label><input type="checkbox" value="' + c + '" onchange="applyFilters()"> ' + (CN[c] || c) + '</label>').join('');
-    document.getElementById('brandFilters').innerHTML = [...new Set(products.map(p => p.brand))].sort().map(b => '<label><input type="checkbox" value="' + b + '" onchange="applyFilters()"> ' + b + '</label>').join('');
+    // Sidebar removed - no filters needed
 }
 function applyFilters() {
-    let f = [...products];
-    let c = [...document.querySelectorAll('#categoryFilters input:checked')].map(i => i.value); if (c.length) f = f.filter(p => c.includes(p.category));
-    let b = [...document.querySelectorAll('#brandFilters input:checked')].map(i => i.value); if (b.length) f = f.filter(p => b.includes(p.brand));
-    let mn = parseFloat(document.getElementById('minPrice').value) || 0, mx = parseFloat(document.getElementById('maxPrice').value) || Infinity;
-    f = f.filter(p => p.price >= mn && p.price <= mx); renderShop(f);
+    renderShop();
 }
-function clearFilters() { document.querySelectorAll('.filter-section input[type=checkbox]').forEach(i => i.checked = false); document.getElementById('minPrice').value = ''; document.getElementById('maxPrice').value = ''; renderShop(); }
-function sortProducts() { let f = [...products], s = document.getElementById('sortSelect').value; let c = [...document.querySelectorAll('#categoryFilters input:checked')].map(i => i.value); if (c.length) f = f.filter(p => c.includes(p.category)); if (s === 'price-low') f.sort((a, b) => a.price - b.price); else if (s === 'price-high') f.sort((a, b) => b.price - a.price); else if (s === 'newest') f.sort((a, b) => b.id - a.id); renderShop(f); }
-function filterByCategory(c) { showPage('shop'); document.querySelectorAll('#categoryFilters input').forEach(i => i.checked = i.value === c); document.getElementById('shopBreadcrumb').textContent = CN[c] || c; renderShop(products.filter(p => p.category === c)); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+function clearFilters() {
+    renderShop();
+}
+function sortProducts() {
+    var f = [...products];
+    var s = document.getElementById('sortSelect').value;
+    if (s === 'price-low') f.sort(function(a, b) { return a.price - b.price; });
+    else if (s === 'price-high') f.sort(function(a, b) { return b.price - a.price; });
+    else if (s === 'newest') f.sort(function(a, b) { return b.id - a.id; });
+    renderShop(f);
+}
+function filterByCategory(c) {
+    showPage('shop');
+    document.getElementById('shopBreadcrumb').textContent = CN[c] || c;
+    renderShop(products.filter(function(p) { return p.category === c; }));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 function handleSearch(e) { if (e.key === 'Enter') searchProducts(); }
 function searchProducts() { let q = document.getElementById('searchInput').value.toLowerCase(), c = document.getElementById('searchCategory').value; let r = products.filter(p => { let mq = !q || p.name.toLowerCase().includes(q) || p.brand.toLowerCase().includes(q); return mq && (c === 'all' || p.category === c); }); showPage('shop'); document.getElementById('shopBreadcrumb').textContent = q ? '"' + q + '"' : 'All'; renderShop(r); }
 
