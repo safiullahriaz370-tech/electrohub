@@ -89,7 +89,9 @@ const CN = {
     cameras: 'Camera Accessories',
     other: 'Other'
 };
+const CPN = { all: 'All Devices', iphone: 'iPhone', samsung: 'Samsung', typec: 'Type-C', microusb: 'Micro USB', laptop: 'Laptop' };
 
+// ===== STATE =====
 // ===== STATE =====
 let products = [];
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
