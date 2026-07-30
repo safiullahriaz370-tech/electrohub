@@ -95,20 +95,26 @@ function showLoading(show) {
 // ===== LOAD PRODUCTS FROM SUPABASE =====
 async function loadProducts() {
     console.log('Loading products from Supabase...');
-    let data = await sbGet('products', 'select=*&order=id.asc');
+    var data = await sbGet('products', 'select=*&order=id.asc');
+    
     if (data && data.length > 0) {
-        products = data.map(p => ({
-            id: p.id, name: p.name, category: p.category,
-            price: p.price, oldPrice: p.old_price, image: p.image || '',
-            description: p.description || '', brand: p.brand || 'Generic',
-            compat: p.compat || 'all', stock: p.stock || 0,
-            rating: parseFloat(p.rating) || 4.0, reviews: p.reviews || 0,
-            isNew: p.is_new, isHot: p.is_hot, isSale: p.is_sale
-        }));
+        products = data.map(function(p) {
+            return {
+                id: p.id, name: p.name, category: p.category,
+                price: p.price, oldPrice: p.old_price, image: p.image || '',
+                images: p.images || [],
+                description: p.description || '', brand: p.brand || 'Generic',
+                compat: p.compat || 'all', stock: p.stock || 0,
+                rating: parseFloat(p.rating) || 4.0, reviews: p.reviews || 0,
+                isNew: p.is_new, isHot: p.is_hot, isSale: p.is_sale,
+                isFlash: p.is_flash
+            };
+        });
         console.log('✅ Products loaded:', products.length);
     } else {
-        console.log('⚠️ No products in Supabase, using defaults');
-        products = getDefaults();
+        // NO DEFAULT PRODUCTS - Empty array
+        products = [];
+        console.log('⚠️ No products in database');
     }
 }
 
