@@ -9,98 +9,55 @@
 </head>
 <body>
 
-<!-- CART NOTIFICATION -->
 <div class="cart-notification" id="cartNotification">
     <i class="fas fa-check-circle"></i>
-    <span id="cartNotifText">Product added to cart!</span>
+    <span id="cartNotifText">Added to cart!</span>
 </div>
 
-<!-- CUSTOMER LOGIN/REGISTER MODAL -->
+<!-- AUTH -->
 <div class="modal-overlay" id="authModal">
-    <div class="modal" style="max-width:450px;">
+    <div class="modal" style="max-width:440px;">
         <button class="modal-close" onclick="closeAuth()"><i class="fas fa-times"></i></button>
-        <div class="auth-container">
-            <!-- LOGIN TAB -->
+        <div style="padding:30px;">
             <div id="loginTab" class="auth-tab active">
                 <div class="auth-header">
                     <div class="auth-icon"><i class="fas fa-user-circle"></i></div>
-                    <h2>Welcome Back!</h2>
-                    <p>Login to continue shopping</p>
+                    <h2>Welcome Back</h2>
+                    <p style="color:var(--medium-gray);font-size:14px;">Login to continue</p>
                 </div>
                 <form onsubmit="loginCustomer(event)">
-                    <div class="form-group">
-                        <label><i class="fas fa-phone"></i> Phone Number</label>
-                        <input type="tel" id="loginPhone" required placeholder="03XX-XXXXXXX" pattern="[0-9]{11}">
-                    </div>
-                    <div class="form-group">
-                        <label><i class="fas fa-lock"></i> Password</label>
-                        <div class="pass-input">
-                            <input type="password" id="loginPass" required placeholder="Enter password" minlength="4">
-                            <button type="button" onclick="togglePass('loginPass',this)"><i class="fas fa-eye"></i></button>
-                        </div>
-                    </div>
+                    <div class="form-group"><label>Phone Number</label><input type="tel" id="loginPhone" required placeholder="03XXXXXXXXX"></div>
+                    <div class="form-group"><label>Password</label><input type="password" id="loginPass" required placeholder="Password" minlength="4"></div>
                     <div id="loginError" class="auth-error"></div>
                     <button type="submit" class="btn-auth"><i class="fas fa-sign-in-alt"></i> Login</button>
                 </form>
-                <div class="auth-switch">
-                    Don't have an account? <a href="#" onclick="switchAuth('register')">Register</a>
-                </div>
+                <p style="text-align:center;margin-top:15px;font-size:14px;">No account? <a href="#" onclick="switchAuth('register')" style="color:var(--primary);font-weight:600;">Register</a></p>
             </div>
-            <!-- REGISTER TAB -->
             <div id="registerTab" class="auth-tab">
                 <div class="auth-header">
                     <div class="auth-icon"><i class="fas fa-user-plus"></i></div>
                     <h2>Create Account</h2>
-                    <p>Register to start shopping</p>
+                    <p style="color:var(--medium-gray);font-size:14px;">Register to shop</p>
                 </div>
                 <form onsubmit="registerCustomer(event)">
-                    <div class="form-group">
-                        <label><i class="fas fa-user"></i> Full Name</label>
-                        <input type="text" id="regName" required placeholder="Your full name">
+                    <div class="form-group"><label>Full Name *</label><input type="text" id="regName" required placeholder="Your name"></div>
+                    <div class="form-group"><label>Phone *</label><input type="tel" id="regPhone" required placeholder="03XXXXXXXXX"></div>
+                    <div class="form-group"><label>Email</label><input type="email" id="regEmail" placeholder="email@example.com"></div>
+                    <div class="form-group"><label>City *</label>
+                        <select id="regCity" required><option value="">Select</option><option>Karachi</option><option>Lahore</option><option>Islamabad</option><option>Rawalpindi</option><option>Faisalabad</option><option>Peshawar</option><option>Quetta</option><option>Multan</option><option>Abbottabad</option><option>Other</option></select>
                     </div>
-                    <div class="form-group">
-                        <label><i class="fas fa-phone"></i> Phone Number</label>
-                        <input type="tel" id="regPhone" required placeholder="03XX-XXXXXXX" pattern="[0-9]{11}">
-                    </div>
-                    <div class="form-group">
-                        <label><i class="fas fa-envelope"></i> Email (Optional)</label>
-                        <input type="email" id="regEmail" placeholder="your@email.com">
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label><i class="fas fa-city"></i> City</label>
-                            <select id="regCity" required>
-                                <option value="">Select</option>
-                                <option>Karachi</option><option>Lahore</option><option>Islamabad</option>
-                                <option>Rawalpindi</option><option>Faisalabad</option><option>Peshawar</option>
-                                <option>Quetta</option><option>Multan</option><option>Sialkot</option>
-                                <option>Hyderabad</option><option>Gujranwala</option><option>Other</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label><i class="fas fa-map-marker-alt"></i> Complete Address</label>
-                        <textarea id="regAddress" required placeholder="House #, Street, Area"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label><i class="fas fa-lock"></i> Create Password</label>
-                        <div class="pass-input">
-                            <input type="password" id="regPass" required placeholder="Min 4 characters" minlength="4">
-                            <button type="button" onclick="togglePass('regPass',this)"><i class="fas fa-eye"></i></button>
-                        </div>
-                    </div>
+                    <div class="form-group"><label>Address *</label><textarea id="regAddress" required placeholder="House, Street, Area"></textarea></div>
+                    <div class="form-group"><label>Password *</label><input type="password" id="regPass" required placeholder="Min 4 chars" minlength="4"></div>
                     <div id="regError" class="auth-error"></div>
                     <button type="submit" class="btn-auth"><i class="fas fa-user-plus"></i> Register</button>
                 </form>
-                <div class="auth-switch">
-                    Already have an account? <a href="#" onclick="switchAuth('login')">Login</a>
-                </div>
+                <p style="text-align:center;margin-top:15px;font-size:14px;">Have account? <a href="#" onclick="switchAuth('login')" style="color:var(--primary);font-weight:600;">Login</a></p>
             </div>
         </div>
     </div>
 </div>
 
-<!-- QUICK VIEW MODAL -->
+<!-- QUICK VIEW -->
 <div class="modal-overlay" id="quickViewModal">
     <div class="modal">
         <button class="modal-close" onclick="closeQuickView()"><i class="fas fa-times"></i></button>
@@ -109,7 +66,7 @@
             <div class="modal-info">
                 <span class="modal-category" id="modalCategory"></span>
                 <h2 id="modalName"></h2>
-                <div class="modal-rating"><div id="modalStars"></div><span id="modalReviews"></span></div>
+                <div class="modal-rating"><span id="modalStars"></span><span id="modalReviews"></span></div>
                 <div class="modal-price">
                     <span class="current-price" id="modalPrice"></span>
                     <span class="old-price" id="modalOldPrice"></span>
@@ -117,13 +74,9 @@
                 </div>
                 <p id="modalDescription"></p>
                 <div class="modal-meta">
-                    <span><i class="fas fa-check-circle"></i> <span id="modalStock">In Stock</span></span>
-                    <span><i class="fas fa-truck"></i> Free Delivery</span>
+                    <span><i class="fas fa-check-circle"></i> <span id="modalStock"></span></span>
                     <span><i class="fas fa-shield-alt"></i> Warranty</span>
-                </div>
-                <div class="modal-compatibility">
-                    <span><i class="fas fa-tag"></i> Brand: <strong id="modalBrand"></strong></span>
-                    <span><i class="fas fa-link"></i> For: <strong id="modalCompat"></strong></span>
+                    <span id="modalDelivery"></span>
                 </div>
                 <div class="modal-quantity">
                     <label>Qty:</label>
@@ -135,14 +88,14 @@
                 </div>
                 <div class="modal-actions">
                     <button class="btn-add-cart" onclick="addToCartFromModal()"><i class="fas fa-cart-plus"></i> Add to Cart</button>
-                    <button class="btn-buy-now" onclick="buyNow()"><i class="fas fa-bolt"></i> Buy Now</button>
+                    <button class="btn-buy-now" onclick="buyNowFromModal()"><i class="fas fa-bolt"></i> Buy Now</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- CHECKOUT MODAL -->
+<!-- CHECKOUT -->
 <div class="modal-overlay" id="checkoutModal">
     <div class="modal checkout-modal">
         <button class="modal-close" onclick="closeCheckout()"><i class="fas fa-times"></i></button>
@@ -150,47 +103,22 @@
             <h2><i class="fas fa-shopping-bag"></i> Checkout</h2>
             <div class="checkout-grid">
                 <div class="checkout-form-section">
-                    <h3>Delivery Information</h3>
-                    <div class="logged-user-info" id="loggedUserInfo"></div>
+                    <h3>Delivery Info</h3>
+                    <div id="loggedUserInfo" style="display:none;" class="logged-user-info"></div>
                     <form id="checkoutForm" onsubmit="placeOrder(event)">
                         <div class="form-row">
-                            <div class="form-group">
-                                <label>Full Name *</label>
-                                <input type="text" id="custName" required placeholder="Your name">
-                            </div>
-                            <div class="form-group">
-                                <label>Phone *</label>
-                                <input type="tel" id="custPhone" required placeholder="03XX-XXXXXXX">
-                            </div>
+                            <div class="form-group"><label>Name *</label><input type="text" id="custName" required></div>
+                            <div class="form-group"><label>Phone *</label><input type="tel" id="custPhone" required></div>
                         </div>
-                        <div class="form-group">
-                            <label>Email</label>
-                            <input type="email" id="custEmail" placeholder="your@email.com">
-                        </div>
+                        <div class="form-group"><label>Email</label><input type="email" id="custEmail"></div>
                         <div class="form-row">
-                            <div class="form-group">
-                                <label>City *</label>
-                                <select id="custCity" required>
-                                    <option value="">Select City</option>
-                                    <option>Karachi</option><option>Lahore</option><option>Islamabad</option>
-                                    <option>Rawalpindi</option><option>Faisalabad</option><option>Peshawar</option>
-                                    <option>Quetta</option><option>Multan</option><option>Sialkot</option>
-                                    <option>Hyderabad</option><option>Gujranwala</option><option>Other</option>
-                                </select>
+                            <div class="form-group"><label>City *</label>
+                                <select id="custCity" required><option value="">Select</option><option>Karachi</option><option>Lahore</option><option>Islamabad</option><option>Rawalpindi</option><option>Faisalabad</option><option>Peshawar</option><option>Quetta</option><option>Multan</option><option>Abbottabad</option><option>Other</option></select>
                             </div>
-                            <div class="form-group">
-                                <label>Postal Code</label>
-                                <input type="text" id="custPostal" placeholder="54000">
-                            </div>
+                            <div class="form-group"><label>Postal</label><input type="text" id="custPostal"></div>
                         </div>
-                        <div class="form-group">
-                            <label>Complete Address *</label>
-                            <textarea id="custAddress" required placeholder="House #, Street, Area, Landmark"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label>Order Notes</label>
-                            <textarea id="custNotes" placeholder="Special instructions..."></textarea>
-                        </div>
+                        <div class="form-group"><label>Address *</label><textarea id="custAddress" required placeholder="House, Street, Area"></textarea></div>
+                        <div class="form-group"><label>Notes</label><textarea id="custNotes" placeholder="Instructions..."></textarea></div>
                         <div class="payment-method">
                             <h3><i class="fas fa-money-bill-wave"></i> Payment</h3>
                             <div class="cod-box">
@@ -204,7 +132,7 @@
                     </form>
                 </div>
                 <div class="order-summary-section">
-                    <h3>Order Summary</h3>
+                    <h3>Summary</h3>
                     <div id="checkoutItems"></div>
                     <div class="summary-totals">
                         <div class="summary-row"><span>Subtotal</span><span id="summarySubtotal">Rs. 0</span></div>
@@ -212,17 +140,14 @@
                         <div class="summary-row discount-row" id="summaryDiscountRow" style="display:none;"><span>Discount</span><span id="summaryDiscount">-Rs. 0</span></div>
                         <div class="summary-row total-row"><span>Total</span><span id="summaryTotal">Rs. 0</span></div>
                     </div>
-                    <div class="promo-code">
-                        <input type="text" id="promoInput" placeholder="Promo code">
-                        <button onclick="applyPromo()">Apply</button>
-                    </div>
+                    <div class="promo-code"><input type="text" id="promoInput" placeholder="Promo code" onfocus="showPromoHint()" style="text-transform:uppercase;"><button onclick="applyPromo()">Apply</button></div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- ORDER SUCCESS MODAL -->
+<!-- SUCCESS -->
 <div class="modal-overlay" id="orderSuccessModal">
     <div class="modal success-modal">
         <div class="success-content">
@@ -230,12 +155,11 @@
             <h2>Order Placed!</h2>
             <p>Thank you for your order</p>
             <div class="order-details-box">
-                <div class="order-detail-row"><span>Order ID:</span><strong id="successOrderId">#EH-00001</strong></div>
-                <div class="order-detail-row"><span>Status:</span><strong class="status-pending">Pending</strong></div>
+                <div class="order-detail-row"><span>Order ID:</span><strong id="successOrderId"></strong></div>
+                <div class="order-detail-row"><span>Status:</span><strong style="color:var(--warning);">Pending</strong></div>
                 <div class="order-detail-row"><span>Payment:</span><strong>Cash on Delivery</strong></div>
-                <div class="order-detail-row"><span>Total:</span><strong id="successTotal">Rs. 0</strong></div>
+                <div class="order-detail-row"><span>Total:</span><strong id="successTotal"></strong></div>
             </div>
-            <p class="success-note"><i class="fas fa-info-circle"></i> You will receive updates on your order.</p>
             <div class="success-actions">
                 <button onclick="openTrackingFromSuccess()" class="btn-view-orders"><i class="fas fa-search"></i> Track</button>
                 <button onclick="continueShopping()" class="btn-continue"><i class="fas fa-shopping-bag"></i> Continue</button>
@@ -244,58 +168,44 @@
     </div>
 </div>
 
-<!-- ORDER TRACKING MODAL -->
+<!-- TRACKING -->
 <div class="modal-overlay" id="trackingModal">
     <div class="modal" style="max-width:600px;">
         <button class="modal-close" onclick="closeTracking()"><i class="fas fa-times"></i></button>
         <div style="padding:30px;">
-            <h2 style="display:flex;align-items:center;gap:10px;margin-bottom:20px;">
-                <i class="fas fa-shipping-fast" style="color:var(--primary);"></i> Track Order
-            </h2>
-            <div class="form-group">
-                <label>Order ID</label>
-                <div style="display:flex;gap:10px;">
-                    <input type="text" id="trackOrderInput" placeholder="EH-00001" style="flex:1;">
-                    <button onclick="trackOrder()" class="btn-primary" style="white-space:nowrap;"><i class="fas fa-search"></i> Track</button>
-                </div>
+            <h2 style="display:flex;align-items:center;gap:10px;margin-bottom:20px;"><i class="fas fa-shipping-fast" style="color:var(--primary);"></i> Track Order</h2>
+            <div class="form-group"><label>Order ID</label>
+                <div style="display:flex;gap:10px;"><input type="text" id="trackOrderInput" placeholder="EH-00001" style="flex:1;"><button onclick="trackOrder()" class="btn-primary" style="white-space:nowrap;"><i class="fas fa-search"></i> Track</button></div>
             </div>
-            <!-- MY ORDERS LIST -->
             <div id="myOrdersList"></div>
             <div id="trackingResult"></div>
         </div>
     </div>
 </div>
 
-<!-- CART SIDEBAR -->
+<!-- CART -->
 <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
 <div class="cart-sidebar" id="cartSidebar">
-    <div class="cart-header">
-        <h3><i class="fas fa-shopping-cart"></i> Cart (<span id="cartHeaderCount">0</span>)</h3>
-        <button onclick="closeCart()"><i class="fas fa-times"></i></button>
-    </div>
-    <div class="cart-items" id="cartItems">
-        <div class="cart-empty"><i class="fas fa-shopping-cart"></i><p>Your cart is empty</p>
-        <button onclick="closeCart()" class="btn-shop-now">Shop Now</button></div>
-    </div>
+    <div class="cart-header"><h3><i class="fas fa-shopping-cart"></i> Cart (<span id="cartHeaderCount">0</span>)</h3><button onclick="closeCart()"><i class="fas fa-times"></i></button></div>
+    <div class="cart-items" id="cartItems"></div>
     <div class="cart-footer" id="cartFooter" style="display:none;">
         <div class="cart-total"><span>Subtotal:</span><span id="cartTotal">Rs. 0</span></div>
         <button class="btn-checkout" onclick="proceedToCheckout()"><i class="fas fa-lock"></i> Checkout</button>
-        <button class="btn-clear-cart" onclick="clearCart()"><i class="fas fa-trash"></i> Clear Cart</button>
+        <button class="btn-clear-cart" onclick="clearCart()"><i class="fas fa-trash"></i> Clear</button>
     </div>
 </div>
 
-<!-- TOP BAR -->
+<!-- TOPBAR -->
 <div class="topbar">
     <div class="container">
         <div class="topbar-left">
-            <span><i class="fas fa-phone-alt"></i> +92 3353 19 3641</span>
-            <span><i class="fas fa-envelope"></i> safiullahriaz370@gmail.com</span>
+            <span><i class="fas fa-phone-alt"></i> +92 300 1234567</span>
+            <span><i class="fas fa-envelope"></i> info@electrohub.pk</span>
         </div>
         <div class="topbar-right">
             <a href="#" onclick="showPage('about')">About</a>
             <a href="#" onclick="showPage('contact')">Contact</a>
-            <a href="#" onclick="showPage('policy')">Policy</a>
-            <a href="#" onclick="openTrackingModal()"><i class="fas fa-truck"></i> Track Order</a>
+            <a href="#" onclick="openTrackingModal()"><i class="fas fa-truck"></i> Track</a>
             <span id="userTopBar"></span>
         </div>
     </div>
@@ -307,46 +217,19 @@
         <div class="header-content">
             <div class="logo" onclick="showPage('home')"><i class="fas fa-bolt"></i><span>Electro<strong>Hub</strong></span></div>
             <div class="search-bar">
-               <select id="searchCategory">
-    <option value="all">All</option>
-    <option value="chargers">Chargers</option>
-    <option value="cables">Cables</option>
-    <option value="earphones">Earphones</option>
-    <option value="powerbanks">Power Banks</option>
-    <option value="watches">Watches</option>
-    <option value="speakers">Speakers</option>
-    <option value="covers">Covers</option>
-    <option value="adapters">Adapters</option>
-    <option value="lights">Ring Lights</option>
-    <option value="stands">Stands</option>
-    <option value="keyboards">Keyboards</option>
-    <option value="storage">Storage</option>
-    <option value="cameras">Cameras</option>
-    <option value="holders">Holders</option>
-    <option value="protectors">Protectors</option>
-    <option value="other">Other</option>
-</select>
+                <select id="searchCategory"><option value="all">All</option><option value="chargers">Chargers</option><option value="cables">Cables</option><option value="earphones">Earphones</option><option value="powerbanks">Power Banks</option><option value="watches">Watches</option><option value="speakers">Speakers</option><option value="covers">Covers</option><option value="adapters">Adapters</option><option value="lights">Lights</option><option value="stands">Stands</option><option value="keyboards">Keyboards</option><option value="storage">Storage</option><option value="cameras">Cameras</option><option value="holders">Holders</option><option value="protectors">Protectors</option></select>
                 <input type="text" id="searchInput" placeholder="Search products..." onkeyup="handleSearch(event)">
                 <button onclick="searchProducts()"><i class="fas fa-search"></i></button>
             </div>
             <div class="header-actions">
-                <button class="header-btn" id="headerUserBtn" onclick="handleUserClick()" title="Account">
-                    <i class="fas fa-user"></i><span id="headerUserText">Login</span>
-                </button>
-                <button class="header-btn" onclick="openTrackingModal()" title="Track">
-                    <i class="fas fa-truck"></i><span>Track</span>
-                </button>
-                <button class="header-btn" onclick="openCart()" title="Cart">
-                    <i class="fas fa-shopping-cart"></i><span>Cart</span>
-                    <span class="cart-badge" id="cartBadge">0</span>
-                </button>
+                <button class="header-btn" id="headerUserBtn" onclick="handleUserClick()"><i class="fas fa-user"></i><span id="headerUserText">Login</span></button>
+                <button class="header-btn" onclick="openCart()"><i class="fas fa-shopping-cart"></i><span>Cart</span><span class="cart-badge" id="cartBadge">0</span></button>
             </div>
         </div>
     </div>
 </header>
 
-<!-- CATEGORY NAV -->
-<!-- CATEGORY NAV -->
+<!-- NAV -->
 <nav class="category-nav"><div class="container">
     <div class="cat-nav-items" id="catNavItems">
         <a href="#" onclick="showPage('shop')" class="cat-nav-item"><i class="fas fa-th-large"></i> All</a>
@@ -359,98 +242,49 @@
         <a href="#" onclick="filterByCategory('covers')" class="cat-nav-item"><i class="fas fa-mobile-alt"></i> Covers</a>
         <a href="#" onclick="filterByCategory('adapters')" class="cat-nav-item"><i class="fas fa-exchange-alt"></i> Adapters</a>
         <a href="#" onclick="filterByCategory('lights')" class="cat-nav-item"><i class="fas fa-lightbulb"></i> Lights</a>
-        <a href="#" onclick="filterByCategory('stands')" class="cat-nav-item"><i class="fas fa-laptop"></i> Stands</a>
         <a href="#" onclick="filterByCategory('keyboards')" class="cat-nav-item"><i class="fas fa-keyboard"></i> Keyboards</a>
-        <a href="#" onclick="filterByCategory('storage')" class="cat-nav-item"><i class="fas fa-hdd"></i> Storage</a>
         <a href="#" onclick="filterByCategory('cameras')" class="cat-nav-item"><i class="fas fa-camera"></i> Cameras</a>
     </div>
 </div></nav>
+
 <button class="mobile-menu-btn" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></button>
 
 <main>
-<!-- HOME PAGE -->
+<!-- HOME -->
 <div id="homePage" class="page active">
     <section class="hero">
         <div class="hero-slider">
-            <div class="hero-slide active">
-                <div class="container"><div class="hero-content"><div class="hero-text">
-                    <span class="hero-badge">🔥 Hot Deals</span>
-                    <h1>Premium Electronics<br><span>Accessories</span></h1>
-                    <p>Best quality at unbeatable prices. COD available nationwide!</p>
-                    <div class="hero-buttons">
-                        <button class="btn-primary" onclick="showPage('shop')"><i class="fas fa-shopping-bag"></i> Shop Now</button>
-                        <button class="btn-secondary" onclick="scrollToSection('flash-sale')"><i class="fas fa-bolt"></i> Flash Sale</button>
-                    </div>
-                    <div class="hero-features"><span><i class="fas fa-truck"></i> Free Delivery</span><span><i class="fas fa-money-bill-wave"></i> COD</span><span><i class="fas fa-shield-alt"></i> Warranty</span></div>
-                </div><div class="hero-image"><i class="fas fa-headphones" style="font-size:180px;color:rgba(255,255,255,0.15);"></i></div></div></div>
-            </div>
-            <div class="hero-slide">
-                <div class="container"><div class="hero-content"><div class="hero-text">
-                    <span class="hero-badge">🆕 New</span>
-                    <h1>Smart Watches<br><span>2025</span></h1>
-                    <p>Starting from Rs. 2,499!</p>
-                    <div class="hero-buttons"><button class="btn-primary" onclick="filterByCategory('watches')"><i class="fas fa-clock"></i> View</button></div>
-                </div><div class="hero-image"><i class="fas fa-clock" style="font-size:180px;color:rgba(255,255,255,0.15);"></i></div></div></div>
-            </div>
-            <div class="hero-slide">
-                <div class="container"><div class="hero-content"><div class="hero-text">
-                    <span class="hero-badge">💰 Save</span>
-                    <h1>Up to 50% OFF<br><span>Power Banks</span></h1>
-                    <p>Premium power banks at incredible discounts!</p>
-                    <div class="hero-buttons"><button class="btn-primary" onclick="filterByCategory('powerbanks')"><i class="fas fa-battery-full"></i> Shop</button></div>
-                </div><div class="hero-image"><i class="fas fa-battery-full" style="font-size:180px;color:rgba(255,255,255,0.15);"></i></div></div></div>
-            </div>
+            <div class="hero-slide active"><div class="container"><div class="hero-content"><div class="hero-text">
+                <span class="hero-badge">🔥 Hot Deals</span>
+                <h1>Premium Electronics<br><span>Accessories</span></h1>
+                <p>Best quality at unbeatable prices. COD nationwide!</p>
+                <div class="hero-buttons"><button class="btn-primary" onclick="showPage('shop')"><i class="fas fa-shopping-bag"></i> Shop Now</button><button class="btn-secondary" onclick="scrollToSection('flash-sale')"><i class="fas fa-bolt"></i> Flash Sale</button></div>
+                <div class="hero-features"><span><i class="fas fa-truck"></i> Free Delivery</span><span><i class="fas fa-money-bill-wave"></i> COD</span><span><i class="fas fa-shield-alt"></i> Warranty</span></div>
+            </div><div class="hero-image"><i class="fas fa-headphones" style="font-size:180px;color:rgba(255,255,255,0.15);"></i></div></div></div></div>
+            <div class="hero-slide"><div class="container"><div class="hero-content"><div class="hero-text">
+                <span class="hero-badge">🆕 New</span><h1>Smart Watches<br><span>2025</span></h1><p>From Rs. 2,499!</p>
+                <div class="hero-buttons"><button class="btn-primary" onclick="filterByCategory('watches')"><i class="fas fa-clock"></i> View</button></div>
+            </div><div class="hero-image"><i class="fas fa-clock" style="font-size:180px;color:rgba(255,255,255,0.15);"></i></div></div></div></div>
+            <div class="hero-slide"><div class="container"><div class="hero-content"><div class="hero-text">
+                <span class="hero-badge">💰 Save</span><h1>50% OFF<br><span>Power Banks</span></h1><p>Limited time!</p>
+                <div class="hero-buttons"><button class="btn-primary" onclick="filterByCategory('powerbanks')"><i class="fas fa-battery-full"></i> Shop</button></div>
+            </div><div class="hero-image"><i class="fas fa-battery-full" style="font-size:180px;color:rgba(255,255,255,0.15);"></i></div></div></div></div>
         </div>
         <div class="hero-dots"><span class="dot active" onclick="goToSlide(0)"></span><span class="dot" onclick="goToSlide(1)"></span><span class="dot" onclick="goToSlide(2)"></span></div>
         <button class="hero-arrow left" onclick="prevSlide()"><i class="fas fa-chevron-left"></i></button>
         <button class="hero-arrow right" onclick="nextSlide()"><i class="fas fa-chevron-right"></i></button>
     </section>
-<!-- SHIPPING TABS -->
-<section class="ship-tabs-section">
-    <div class="container">
-        <div class="ship-tabs">
-            <button class="ship-tab pak active" onclick="switchShipping('pakistan',this)">
-                <span class="ship-flag">🇵🇰</span>
-                <div class="ship-info">
-                    <h3>Pakistan Shipped</h3>
-                    <p>2-5 Days Delivery • Local Stock</p>
-                </div>
-                <span class="ship-badge pak-badge">Fast</span>
-            </button>
-            <button class="ship-tab china" onclick="switchShipping('china',this)">
-                <span class="ship-flag">🇨🇳</span>
-                <div class="ship-info">
-                    <h3>China Shipped</h3>
-                    <p>15-25 Days Delivery • Direct Import</p>
-                </div>
-                <span class="ship-badge china-badge">Cheap</span>
-            </button>
-        </div>
-    </div>
-</section>
 
-<!-- ACTIVE SHIPPING INDICATOR -->
-<div class="active-shipping" id="activeShipping">
-    <div class="container">
-        <span id="shippingIndicator">🇵🇰 Showing Pakistan Shipped Products</span>
-    </div>
-</div>
     <section class="trust-badges"><div class="container"><div class="badges-grid">
         <div class="badge-item"><i class="fas fa-truck"></i><div><h4>Free Delivery</h4><p>Over Rs. 2000</p></div></div>
-        <div class="badge-item"><i class="fas fa-money-bill-wave"></i><div><h4>Cash on Delivery</h4><p>Pay on receive</p></div></div>
-        <div class="badge-item"><i class="fas fa-undo"></i><div><h4>7-Day Returns</h4><p>Easy returns</p></div></div>
-        <div class="badge-item"><i class="fas fa-shield-alt"></i><div><h4>Genuine</h4><p>100% authentic</p></div></div>
+        <div class="badge-item"><i class="fas fa-money-bill-wave"></i><div><h4>COD</h4><p>Pay on receive</p></div></div>
+        <div class="badge-item"><i class="fas fa-undo"></i><div><h4>7-Day Returns</h4><p>Easy</p></div></div>
+        <div class="badge-item"><i class="fas fa-shield-alt"></i><div><h4>Genuine</h4><p>100%</p></div></div>
     </div></div></section>
 
-    <section class="section categories-section"><div class="container">
-        <div class="section-header"><h2><i class="fas fa-th-large"></i> Categories</h2><a href="#" onclick="showPage('shop')">View All <i class="fas fa-arrow-right"></i></a></div>
-        <div class="categories-grid" id="homeCategoriesGrid"></div>
-    </div></section>
-
-    <section class="section flash-sale" id="flash-sale"><div class="container">
-        <div class="section-header flash-header">
-            <h2><i class="fas fa-bolt"></i> Flash Sale</h2>
-            <div class="countdown"><div class="count-box"><span id="hours">08</span><small>Hrs</small></div><div class="count-box"><span id="minutes">45</span><small>Min</small></div><div class="count-box"><span id="seconds">30</span><small>Sec</small></div></div>
+    <section class="section" id="flash-sale"><div class="container">
+        <div class="section-header flash-header"><h2><i class="fas fa-bolt"></i> Flash Sale</h2>
+            <div class="countdown"><div class="count-box"><span id="hours">08</span><small>H</small></div><div class="count-box"><span id="minutes">45</span><small>M</small></div><div class="count-box"><span id="seconds">30</span><small>S</small></div></div>
         </div>
         <div class="products-grid" id="flashSaleProducts"></div>
     </div></section>
@@ -459,11 +293,6 @@
         <div class="section-header"><h2><i class="fas fa-star"></i> Featured</h2><a href="#" onclick="showPage('shop')">All <i class="fas fa-arrow-right"></i></a></div>
         <div class="products-grid" id="featuredProducts"></div>
     </div></section>
-
-    <section class="promo-banner"><div class="container"><div class="promo-grid">
-        <div class="promo-card"><div class="promo-content"><span>Free Delivery</span><h3>Above Rs. 2000</h3><button onclick="showPage('shop')" class="btn-primary">Shop</button></div><i class="fas fa-truck promo-icon"></i></div>
-        <div class="promo-card promo-dark"><div class="promo-content"><span>New</span><h3>Smart Watches</h3><button onclick="filterByCategory('watches')" class="btn-primary">Explore</button></div><i class="fas fa-clock promo-icon"></i></div>
-    </div></div></section>
 
     <section class="section"><div class="container">
         <div class="section-header"><h2><i class="fas fa-fire"></i> New Arrivals</h2><a href="#" onclick="showPage('shop')">All <i class="fas fa-arrow-right"></i></a></div>
@@ -474,70 +303,39 @@
         <div class="section-header"><h2><i class="fas fa-trophy"></i> Best Sellers</h2><a href="#" onclick="showPage('shop')">All <i class="fas fa-arrow-right"></i></a></div>
         <div class="products-grid" id="bestSellers"></div>
     </div></section>
-
-    <section class="section brands-section"><div class="container">
-        <div class="section-header"><h2><i class="fas fa-award"></i> Brands</h2></div>
-        <div class="brands-grid" id="brandsGrid"></div>
-    </div></section>
-
-    <section class="newsletter"><div class="container"><div class="newsletter-content">
-        <h2>Newsletter</h2><p>Get latest deals</p>
-        <div class="newsletter-form"><input type="email" placeholder="Your email"><button class="btn-primary" onclick="alert('Subscribed!')">Subscribe</button></div>
-    </div></div></section>
 </div>
 
-<!-- SHOP PAGE -->
-<div id="shopPage" class="page">
-    <div class="container">
-        <div class="shop-header">
-            <div class="breadcrumb"><a href="#" onclick="showPage('home')">Home</a> / <span id="shopBreadcrumb">All Products</span></div>
-            <div class="shop-controls">
-                <div class="shop-count"><span id="productCount">0</span> Products</div>
-                <div class="shop-sort"><select id="sortSelect" onchange="sortProducts()"><option value="default">Default</option><option value="price-low">Price ↑</option><option value="price-high">Price ↓</option><option value="name-az">A-Z</option><option value="newest">Newest</option></select></div>
-                <div class="view-toggle"><button class="active" onclick="setView('grid',this)"><i class="fas fa-th"></i></button><button onclick="setView('list',this)"><i class="fas fa-list"></i></button></div>
-            </div>
-        </div>
-        <div class="shop-layout">
-          
-            <div class="shop-products"><div class="products-grid" id="shopProducts"></div></div>
+<!-- SHOP -->
+<div id="shopPage" class="page"><div class="container">
+    <div class="shop-header">
+        <div class="breadcrumb"><a href="#" onclick="showPage('home')">Home</a> / <span id="shopBreadcrumb">All Products</span></div>
+        <div class="shop-controls"><span id="productCount">0</span> Products
+            <select id="sortSelect" onchange="sortProducts()"><option value="default">Default</option><option value="price-low">Price ↑</option><option value="price-high">Price ↓</option><option value="newest">Newest</option></select>
         </div>
     </div>
-</div>
+    <div class="products-grid" id="shopProducts"></div>
+</div></div>
 
 <!-- ABOUT -->
-<div id="aboutPage" class="page"><div class="container"><div class="breadcrumb"><a href="#" onclick="showPage('home')">Home</a> / About</div><div class="info-page"><h1><i class="fas fa-store"></i> About ElectroHub</h1><div class="info-content"><p><strong>ElectroHub</strong> — Pakistan's #1 electronics accessories store! 🇵🇰</p><h3>Why Us?</h3><div class="about-features"><div class="about-feature"><i class="fas fa-check-circle"></i><div><h4>Genuine Products</h4><p>Authorized distributors</p></div></div><div class="about-feature"><i class="fas fa-truck"></i><div><h4>Nationwide</h4><p>All Pakistan</p></div></div><div class="about-feature"><i class="fas fa-money-bill-wave"></i><div><h4>COD</h4><p>Pay on receive</p></div></div><div class="about-feature"><i class="fas fa-headset"></i><div><h4>24/7 Support</h4><p>Always here</p></div></div></div></div></div></div></div>
+<div id="aboutPage" class="page"><div class="container"><div class="info-page"><h1><i class="fas fa-store"></i> About ElectroHub</h1><div class="info-content"><p><strong>ElectroHub</strong> — Pakistan's electronics store!</p><div class="about-features"><div class="about-feature"><i class="fas fa-check-circle"></i><div><h4>Genuine</h4><p>Authorized products</p></div></div><div class="about-feature"><i class="fas fa-truck"></i><div><h4>Nationwide</h4><p>All Pakistan</p></div></div><div class="about-feature"><i class="fas fa-money-bill-wave"></i><div><h4>COD</h4><p>Pay on receive</p></div></div><div class="about-feature"><i class="fas fa-headset"></i><div><h4>24/7 Support</h4><p>Always here</p></div></div></div></div></div></div></div>
 
 <!-- CONTACT -->
-<div id="contactPage" class="page"><div class="container"><div class="breadcrumb"><a href="#" onclick="showPage('home')">Home</a> / Contact</div><div class="info-page"><h1><i class="fas fa-envelope"></i> Contact Us</h1><div class="contact-grid"><div class="contact-info"><div class="contact-item"><i class="fas fa-map-marker-alt"></i><div><h4>Address</h4><p>Shop #123, Saddar, Karachi</p></div></div><div class="contact-item"><i class="fas fa-phone-alt"></i><div><h4>Phone</h4><p>+92 300 1234567</p></div></div><div class="contact-item"><i class="fas fa-envelope"></i><div><h4>Email</h4><p>info@electrohub.pk</p></div></div><div class="contact-social"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-whatsapp"></i></a></div></div><div class="contact-form-box"><h3>Message</h3><form onsubmit="submitContact(event)"><div class="form-group"><label>Name</label><input type="text" required></div><div class="form-group"><label>Email</label><input type="email" required></div><div class="form-group"><label>Message</label><textarea required rows="4"></textarea></div><button type="submit" class="btn-primary"><i class="fas fa-paper-plane"></i> Send</button></form></div></div></div></div></div>
-
-<!-- POLICY -->
-<div id="policyPage" class="page"><div class="container"><div class="breadcrumb"><a href="#" onclick="showPage('home')">Home</a> / Policy</div><div class="info-page"><h1><i class="fas fa-truck"></i> Delivery & Returns</h1><div class="info-content"><h3>📦 Delivery</h3><ul><li>2-5 days major cities</li><li>Rs. 150 (Free above Rs. 2,000)</li><li>Cash on Delivery only</li></ul><h3>🔄 Returns</h3><ul><li>7 days return window</li><li>Unused, original packaging</li><li>Free replacement if defective</li></ul><h3>📞 Help: +92 300 1234567</h3></div></div></div></div>
+<div id="contactPage" class="page"><div class="container"><div class="info-page"><h1><i class="fas fa-envelope"></i> Contact</h1><div class="contact-grid"><div class="contact-info"><div class="contact-item"><i class="fas fa-phone-alt"></i><div><h4>Phone</h4><p>+92 300 1234567</p></div></div><div class="contact-item"><i class="fas fa-envelope"></i><div><h4>Email</h4><p>info@electrohub.pk</p></div></div><div class="contact-item"><i class="fas fa-map-marker-alt"></i><div><h4>Address</h4><p>Abbottabad, Pakistan</p></div></div><div class="contact-social"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-whatsapp"></i></a></div></div><div class="contact-form-box"><h3>Message</h3><form onsubmit="event.preventDefault();alert('Thanks!');this.reset();"><div class="form-group"><label>Name</label><input type="text" required></div><div class="form-group"><label>Email</label><input type="email" required></div><div class="form-group"><label>Message</label><textarea required rows="4"></textarea></div><button type="submit" class="btn-primary"><i class="fas fa-paper-plane"></i> Send</button></form></div></div></div></div></div>
 
 </main>
 
 <!-- FOOTER -->
 <footer class="footer"><div class="container">
     <div class="footer-grid">
-        <div class="footer-col"><div class="footer-logo"><i class="fas fa-bolt"></i><span>Electro<strong>Hub</strong></span></div><p>Premium accessories. Nationwide COD.</p><div class="footer-social"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-whatsapp"></i></a></div></div>
-        <div class="footer-col"><h4>Links</h4><ul><li><a href="#" onclick="showPage('home')">Home</a></li><li><a href="#" onclick="showPage('shop')">Shop</a></li><li><a href="#" onclick="showPage('about')">About</a></li><li><a href="#" onclick="showPage('contact')">Contact</a></li><li><a href="#" onclick="openTrackingModal()">Track Order</a></li></ul></div>
-       <div class="footer-col"><h4>Categories</h4><ul>
-    <li><a href="#" onclick="filterByCategory('chargers')">Chargers</a></li>
-    <li><a href="#" onclick="filterByCategory('earphones')">Earphones</a></li>
-    <li><a href="#" onclick="filterByCategory('powerbanks')">Power Banks</a></li>
-    <li><a href="#" onclick="filterByCategory('watches')">Watches</a></li>
-    <li><a href="#" onclick="filterByCategory('speakers')">Speakers</a></li>
-    <li><a href="#" onclick="filterByCategory('cables')">Cables</a></li>
-    <li><a href="#" onclick="filterByCategory('covers')">Covers</a></li>
-    <li><a href="#" onclick="filterByCategory('adapters')">Adapters</a></li>
-    <li><a href="#" onclick="filterByCategory('lights')">Ring Lights</a></li>
-    <li><a href="#" onclick="filterByCategory('keyboards')">Keyboards</a></li>
-</ul></div>
-        <div class="footer-col"><h4>Contact</h4><ul class="contact-list"><li><i class="fas fa-phone-alt"></i> +92 3353 19 3641</li><li><i class="fas fa-envelope"></i> safiullahriaz370@gmail.com</li></ul></div>
+        <div class="footer-col"><div class="footer-logo"><i class="fas fa-bolt"></i><span>Electro<strong>Hub</strong></span></div><p>Premium accessories. COD nationwide.</p></div>
+        <div class="footer-col"><h4>Links</h4><ul><li><a href="#" onclick="showPage('home')">Home</a></li><li><a href="#" onclick="showPage('shop')">Shop</a></li><li><a href="#" onclick="showPage('about')">About</a></li><li><a href="#" onclick="openTrackingModal()">Track Order</a></li></ul></div>
+        <div class="footer-col"><h4>Categories</h4><ul><li><a href="#" onclick="filterByCategory('chargers')">Chargers</a></li><li><a href="#" onclick="filterByCategory('earphones')">Earphones</a></li><li><a href="#" onclick="filterByCategory('watches')">Watches</a></li><li><a href="#" onclick="filterByCategory('powerbanks')">Power Banks</a></li><li><a href="#" onclick="filterByCategory('speakers')">Speakers</a></li></ul></div>
+        <div class="footer-col"><h4>Contact</h4><ul class="contact-list"><li><i class="fas fa-phone-alt"></i> +92 300 1234567</li><li><i class="fas fa-envelope"></i> info@electrohub.pk</li></ul></div>
     </div>
-    <div class="footer-bottom"><p>&copy; 2025 ElectroHub</p><div class="footer-badges"><span><i class="fas fa-lock"></i> Secure</span><span><i class="fas fa-truck"></i> Fast</span></div></div>
+    <div class="footer-bottom"><p>&copy; 2025 ElectroHub</p></div>
 </div></footer>
 
-<a href="https://wa.me/923353193641" target="_blank" class="whatsapp-btn"><i class="fab fa-whatsapp"></i></a>
+<a href="https://wa.me/923001234567" target="_blank" class="whatsapp-btn"><i class="fab fa-whatsapp"></i></a>
 <button class="scroll-top" id="scrollTop" onclick="scrollToTop()"><i class="fas fa-arrow-up"></i></button>
 
 <script src="script.js"></script>
