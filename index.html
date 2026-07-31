@@ -232,7 +232,7 @@
 <!-- NAV -->
 <nav class="category-nav"><div class="container">
     <div class="cat-nav-items" id="catNavItems">
-        <a href="#" onclick="showPage('shop')" class="cat-nav-item"><i class="fas fa-th-large"></i> All</a>
+        <a href="#" onclick="showPage('home');window.scrollTo({top:0,behavior:'smooth'});" class="cat-nav-item"><i class="fas fa-th-large"></i> All</a>
         <a href="#" onclick="filterByCategory('chargers')" class="cat-nav-item"><i class="fas fa-charging-station"></i> Chargers</a>
         <a href="#" onclick="filterByCategory('cables')" class="cat-nav-item"><i class="fas fa-plug"></i> Cables</a>
         <a href="#" onclick="filterByCategory('earphones')" class="cat-nav-item"><i class="fas fa-headphones-alt"></i> Earphones</a>
@@ -282,29 +282,35 @@
         <div class="badge-item"><i class="fas fa-shield-alt"></i><div><h4>Genuine</h4><p>100%</p></div></div>
     </div></div></section>
 
-    <section class="section" id="flash-sale"><div class="container">
-        <div class="section-header flash-header"><h2><i class="fas fa-bolt"></i> Flash Sale</h2>
-            <div class="countdown"><div class="count-box"><span id="hours">08</span><small>H</small></div><div class="count-box"><span id="minutes">45</span><small>M</small></div><div class="count-box"><span id="seconds">30</span><small>S</small></div></div>
+    <!-- FLASH SALE -->
+    <section class="section flash-sale" id="flash-sale"><div class="container">
+        <div class="section-header flash-header">
+            <h2><i class="fas fa-bolt"></i> ⚡ Flash Sale</h2>
+            <div class="countdown">
+                <div class="count-box"><span id="hours">08</span><small>H</small></div>
+                <div class="count-box"><span id="minutes">45</span><small>M</small></div>
+                <div class="count-box"><span id="seconds">30</span><small>S</small></div>
+            </div>
         </div>
         <div class="products-grid" id="flashSaleProducts"></div>
     </div></section>
 
+    <!-- NEW ARRIVALS -->
     <section class="section"><div class="container">
-        <div class="section-header"><h2><i class="fas fa-star"></i> Featured</h2><a href="#" onclick="showPage('shop')">All <i class="fas fa-arrow-right"></i></a></div>
-        <div class="products-grid" id="featuredProducts"></div>
-    </div></section>
-
-    <section class="section"><div class="container">
-        <div class="section-header"><h2><i class="fas fa-fire"></i> New Arrivals</h2><a href="#" onclick="showPage('shop')">All <i class="fas fa-arrow-right"></i></a></div>
+        <div class="section-header">
+            <h2><i class="fas fa-fire"></i> 🆕 New Arrivals</h2>
+        </div>
         <div class="products-grid" id="newArrivals"></div>
     </div></section>
 
+    <!-- ALL PRODUCTS -->
     <section class="section"><div class="container">
-        <div class="section-header"><h2><i class="fas fa-trophy"></i> Best Sellers</h2><a href="#" onclick="showPage('shop')">All <i class="fas fa-arrow-right"></i></a></div>
-        <div class="products-grid" id="bestSellers"></div>
+        <div class="section-header">
+            <h2><i class="fas fa-th-large"></i> 📦 All Products</h2>
+        </div>
+        <div class="products-grid" id="allProductsGrid"></div>
     </div></section>
 </div>
-
 <!-- SHOP -->
 <div id="shopPage" class="page"><div class="container">
     <div class="shop-header">
