@@ -78,6 +78,196 @@
                     <span><i class="fas fa-shield-alt"></i> Warranty</span>
                     <span id="modalDelivery"></span>
                 </div>
+                <style>/* PRODUCT ROW FIX */
+.prow {
+    background: var(--w);
+    padding: 10px 12px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
+    border: 1px solid var(--g);
+    transition: var(--tr);
+    font-size: 12px;
+}
+
+.prow:hover {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.pimg {
+    width: 36px;
+    height: 36px;
+    background: var(--lg);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
+.pimg img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.pimg i {
+    color: var(--g);
+    font-size: 14px;
+}
+
+.pinfo {
+    flex: 1;
+    min-width: 0;
+}
+
+.pinfo h5 {
+    font-size: 12px;
+    margin-bottom: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.pinfo span {
+    font-size: 10px;
+    color: var(--mg);
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    flex-wrap: wrap;
+}
+
+.ptag {
+    font-size: 8px;
+    padding: 1px 4px;
+    border-radius: 3px;
+    font-weight: 600;
+}
+
+.pprice {
+    font-weight: 700;
+    color: var(--p);
+    min-width: 70px;
+    font-size: 12px;
+    text-align: right;
+}
+
+.pprice s {
+    color: var(--mg);
+    font-weight: 400;
+    font-size: 10px;
+    margin-left: 3px;
+}
+
+.pstock {
+    min-width: 55px;
+    font-size: 11px;
+    text-align: center;
+}
+
+.pacts {
+    display: flex;
+    gap: 4px;
+}
+
+.pacts button {
+    width: 28px;
+    height: 28px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* FORM FIX */
+.pform {
+    background: var(--w);
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    display: none;
+    animation: fadeIn 0.3s;
+    border: 2px solid var(--pl);
+}
+
+.pform.show {
+    display: block;
+}
+
+.pform h4 {
+    font-size: 15px;
+    color: var(--p);
+    margin-bottom: 14px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--pl);
+}
+
+.fgrp label {
+    font-size: 11px;
+}
+
+.fgrp input, .fgrp select, .fgrp textarea {
+    padding: 8px 10px;
+    font-size: 12px;
+}
+
+.checkrow {
+    padding: 8px;
+    gap: 12px;
+}
+
+.chkitem {
+    font-size: 12px;
+}
+
+.chkitem input {
+    width: 14px;
+    height: 14px;
+}
+
+/* TAB HEADER */
+.tabheader h4 {
+    font-size: 15px;
+}
+
+.badd {
+    padding: 8px 16px;
+    font-size: 12px;
+}
+
+/* MOBILE FIX */
+@media (max-width: 768px) {
+    .prow {
+        padding: 8px;
+        gap: 8px;
+    }
+    .pimg {
+        width: 32px;
+        height: 32px;
+    }
+    .pinfo h5 {
+        font-size: 11px;
+    }
+    .pprice {
+        font-size: 11px;
+        min-width: 60px;
+    }
+    .pstock {
+        display: none;
+    }
+    .pacts button {
+        width: 26px;
+        height: 26px;
+        font-size: 10px;
+    }
+}</style>
                 <div class="modal-quantity">
                     <label>Qty:</label>
                     <div class="qty-selector">
