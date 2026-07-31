@@ -30,7 +30,17 @@ function handleUserClick(){loggedUser?confirm('Logout?')&&logoutUser():openAuth(
 function updateUserUI(){var t=document.getElementById('userTopBar'),h=document.getElementById('headerUserText');if(loggedUser){t.innerHTML='<a href="#" onclick="logoutUser()" style="color:var(--primary);font-weight:600;"><i class="fas fa-user-check"></i> '+loggedUser.name.split(' ')[0]+' | Logout</a>';h.textContent=loggedUser.name.split(' ')[0];}else{t.innerHTML='<a href="#" onclick="openAuth()"><i class="fas fa-user"></i> Login</a>';h.textContent='Login';}}
 function showNotif(t,c){var n=document.getElementById('cartNotification');n.style.background=c||'var(--success)';document.getElementById('cartNotifText').textContent=t;n.classList.remove('show');void n.offsetWidth;n.classList.add('show');setTimeout(function(){n.classList.remove('show');},2500);}
 
-function renderAll(){var flash=products.filter(function(p){return p.isFlash||(p.isSale&&p.oldPrice);}).sort(function(a,b){return((b.oldPrice-b.price)/b.oldPrice)-((a.oldPrice-a.price)/a.oldPrice);}).slice(0,4);rG('flashSaleProducts',flash);rG('featuredProducts',products.filter(function(p){return p.isHot;}).slice(0,8));rG('newArrivals',products.filter(function(p){return p.isNew;}).slice(0,8));rG('bestSellers',products.slice().sort(function(a,b){return b.reviews-a.reviews;}).slice(0,8));renderShop();}
+function renderAll(){
+    var flash=products.filter(function(p){
+        return p.isFlash||(p.isSale&&p.oldPrice);
+    }).sort(function(a,b){
+        return((b.oldPrice-b.price)/b.oldPrice)-((a.oldPrice-a.price)/a.oldPrice);
+    }).slice(0,4);
+    
+    rG('flashSaleProducts',flash);
+    rG('newArrivals',products.filter(function(p){return p.isNew;}).slice(0,8));
+    rG('allProductsGrid',products);
+}
 
 function rG(id,l){var e=document.getElementById(id);if(e)e.innerHTML=l.length?l.map(pCard).join(''):'<p style="text-align:center;color:#999;padding:30px;grid-column:1/-1">No products</p>';}
 
