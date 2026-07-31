@@ -2,546 +2,422 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>ElectroHub - Electronics Accessories Store</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ElectroHub Admin</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-</head>https://github.com/safiullahriaz370-tech/electrohub/blob/main/admin.html
+    <style>
+        html{font-size:14px;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+        *{margin:0;padding:0;box-sizing:border-box;max-width:100%}
+        :root{--p:#FF7A00;--pd:#E56D00;--pl:#FFF3E6;--w:#FFF;--lg:#F8F8F8;--g:#E5E5E5;--mg:#999;--d:#222;--dl:#555;--s:#28a745;--dn:#dc3545;--wn:#ffc107;--i:#17a2b8;--sb:240px;--sh:0 2px 8px rgba(0,0,0,0.05);--tr:all 0.3s ease}
+        body{font-family:'Segoe UI',sans-serif;background:var(--lg);color:var(--d);overflow-x:hidden;width:100%}
+        @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+        @keyframes slideUp{from{transform:translateY(30px);opacity:0}to{transform:translateY(0);opacity:1}}
+        @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+        @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+        @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+
+        /* LOGIN */
+        .ls{position:fixed;inset:0;background:linear-gradient(135deg,#1a1a2e,#16213e);display:flex;align-items:center;justify-content:center;z-index:9999;transition:all 0.5s}
+        .ls.h{opacity:0;visibility:hidden;pointer-events:none}
+        .lb{background:var(--w);border-radius:16px;padding:35px 28px;width:100%;max-width:360px;margin:15px;box-shadow:0 20px 50px rgba(0,0,0,0.4);text-align:center;animation:slideUp 0.5s}
+        .licon{width:60px;height:60px;background:linear-gradient(135deg,var(--p),#FF9A3C);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 15px}
+        .licon i{font-size:26px;color:white}
+        .lb h2{font-size:18px;margin-bottom:4px}
+        .lb>p{color:var(--mg);font-size:12px;margin-bottom:20px}
+        .linp{position:relative;margin-bottom:10px}
+        .linp input{width:100%;padding:11px 40px 11px 14px;border:2px solid var(--g);border-radius:10px;font-size:14px;outline:none;letter-spacing:3px;text-align:center;font-family:monospace;transition:var(--tr)}
+        .linp input:focus{border-color:var(--p)}
+        .linp input.err{border-color:var(--dn);animation:shake 0.4s}
+        .linp input.ok{border-color:var(--s)}
+        .eyeb{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:14px;color:#aaa}
+        .lerr{color:var(--dn);font-size:11px;min-height:14px;margin-bottom:6px;opacity:0;transition:opacity 0.3s;display:flex;align-items:center;justify-content:center;gap:3px}
+        .lerr.sh{opacity:1}
+        .lbtn{width:100%;padding:12px;background:linear-gradient(135deg,var(--p),#FF9A3C);color:white;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;transition:var(--tr);display:flex;align-items:center;justify-content:center;gap:6px}
+        .lbtn:hover{transform:translateY(-2px)}
+        .lbtn:disabled{opacity:0.5;cursor:not-allowed;transform:none}
+        .lbtn.ok{background:linear-gradient(135deg,var(--s),#20c997)}
+        .lfooter{margin-top:14px;font-size:10px;color:#aaa}
+        a.backl{display:inline-flex;align-items:center;gap:4px;color:var(--p);font-size:12px;margin-top:10px;text-decoration:none}
+
+        /* LAYOUT */
+        .adm{display:none;min-height:100vh}
+        .adm.sh{display:flex;animation:fadeIn 0.4s}
+
+        /* SIDEBAR */
+        .sd{width:var(--sb);background:linear-gradient(180deg,#1a1a2e,#16213e);color:white;position:fixed;top:0;left:0;height:100vh;overflow-y:auto;z-index:100;transition:transform 0.3s}
+        .sdh{padding:16px 14px;border-bottom:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;gap:10px}
+        .sdh .lgic{width:34px;height:34px;background:var(--p);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;color:white}
+        .sdh h2{font-size:15px}
+        .sdh h2 span{color:var(--p)}
+        .sdh small{display:block;font-size:9px;color:#666}
+        .sdnav{padding:8px 0}
+        .sdnav a{display:flex;align-items:center;gap:9px;padding:10px 18px;color:#888;font-size:12px;transition:var(--tr);border-left:3px solid transparent;cursor:pointer;text-decoration:none}
+        .sdnav a:hover{color:white;background:rgba(255,255,255,0.05)}
+        .sdnav a.act{color:white;background:rgba(255,122,0,0.15);border-left-color:var(--p)}
+        .sdnav a i{width:16px;text-align:center;font-size:12px}
+        .nbg{margin-left:auto;background:var(--p);color:white;font-size:9px;padding:2px 6px;border-radius:8px;font-weight:600}
+        .nbg.red{background:var(--dn);animation:pulse 1.5s infinite}
+        .ndiv{height:1px;background:rgba(255,255,255,0.08);margin:6px 16px}
+        .sdft{padding:14px 16px;border-top:1px solid rgba(255,255,255,0.08);position:absolute;bottom:0;width:100%}
+        .sdft a{display:flex;align-items:center;gap:6px;color:#dc3545;font-size:12px;cursor:pointer;text-decoration:none}
+
+        /* MAIN */
+        .main{margin-left:var(--sb);flex:1;min-height:100vh}
+
+        /* TOPBAR */
+        .topbar2{background:var(--w);padding:10px 20px;display:flex;justify-content:space-between;align-items:center;box-shadow:var(--sh);position:sticky;top:0;z-index:50}
+        .topbar2 h3{font-size:15px;display:flex;align-items:center;gap:7px}
+        .topbar2 h3 i{color:var(--p);font-size:14px}
+        .tright{display:flex;align-items:center;gap:8px}
+        .stlink{padding:6px 12px;background:var(--pl);color:var(--p);border:none;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:4px;text-decoration:none;transition:var(--tr)}
+        .stlink:hover{background:var(--p);color:white}
+        .rfbtn{padding:6px 10px;background:var(--lg);border:1px solid var(--g);border-radius:6px;cursor:pointer;font-size:12px;transition:var(--tr)}
+        .rfbtn:hover{background:var(--p);color:white;border-color:var(--p)}
+        .rfbtn.spinning i{animation:spin 1s linear infinite}
+        .mtoggle{display:none;background:none;border:none;font-size:18px;cursor:pointer}
+        .content{padding:16px 20px}
+
+        /* TABS */
+        .atab{display:none;animation:fadeIn 0.4s}
+        .atab.act{display:block}
+
+        /* STATS */
+        .sgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+        .scard{background:var(--w);padding:16px;border-radius:10px;display:flex;align-items:center;gap:12px;box-shadow:var(--sh);transition:transform 0.3s;border-left:3px solid transparent}
+        .scard:hover{transform:translateY(-2px)}
+        .scard:nth-child(1){border-left-color:#667eea}
+        .scard:nth-child(2){border-left-color:#28a745}
+        .scard:nth-child(3){border-left-color:var(--p)}
+        .scard:nth-child(4){border-left-color:#dc3545}
+        .sicon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;color:white}
+        .sicon.bl{background:linear-gradient(135deg,#667eea,#764ba2)}
+        .sicon.gr{background:linear-gradient(135deg,#11998e,#38ef7d)}
+        .sicon.or{background:linear-gradient(135deg,#f12711,#f5af19)}
+        .sicon.rd{background:linear-gradient(135deg,#eb3349,#f45c43)}
+        .sinfo h4{font-size:20px;font-weight:700;margin-bottom:1px}
+        .sinfo p{font-size:10px;color:var(--mg)}
+
+        .dgrid{display:grid;grid-template-columns:2fr 1fr;gap:14px}
+        .card2{background:var(--w);border-radius:10px;padding:16px;box-shadow:var(--sh);margin-bottom:14px}
+        .card2 h4{font-size:13px;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid var(--pl);display:flex;align-items:center;gap:5px}
+        .card2 h4 i{color:var(--p);font-size:12px}
+
+        /* FILTERS */
+        .filtbtns{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:14px}
+        .filtb{padding:6px 12px;border:1px solid var(--g);background:var(--w);border-radius:16px;cursor:pointer;font-size:11px;transition:var(--tr);font-weight:500}
+        .filtb.act,.filtb:hover{background:var(--p);color:white;border-color:var(--p)}
+
+        /* ORDER ROW */
+        .orow{background:var(--w);border-radius:10px;padding:12px;margin-bottom:8px;border:1px solid var(--g);transition:var(--tr)}
+        .orow:hover{box-shadow:0 3px 10px rgba(0,0,0,0.05)}
+        .orow.neworder{border-left:3px solid var(--p);animation:fadeIn 0.5s}
+        .orowh{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:5px}
+        .orowh h5{color:var(--p);font-size:12px;display:flex;align-items:center;gap:4px}
+        .orowb{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;font-size:11px;color:var(--dl);margin-bottom:8px}
+        .orowb strong{display:block;margin-top:1px;color:var(--d);font-size:11px}
+        .oitems{background:var(--lg);padding:8px;border-radius:6px;margin-bottom:8px;font-size:10px}
+        .oitems h6{font-size:10px;margin-bottom:4px}
+        .oiline{display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px solid var(--g);font-size:10px}
+        .oiline:last-child{border:none}
+        .orowf{display:flex;justify-content:space-between;align-items:center;padding-top:8px;border-top:1px solid var(--g);flex-wrap:wrap;gap:6px}
+        .ototal{font-size:14px;font-weight:700;color:var(--p)}
+
+        .sbadge{padding:3px 8px;border-radius:12px;font-size:10px;font-weight:600;display:inline-block}
+        .s-Pending{background:#FFF3CD;color:#856404}
+        .s-Confirmed{background:#D1ECF1;color:#0C5460}
+        .s-Shipped{background:#CCE5FF;color:#004085}
+        .s-Delivered{background:#D4EDDA;color:#155724}
+        .s-Cancelled{background:#F8D7DA;color:#721C24}
+        .ssel{padding:5px 10px;border:1px solid var(--g);border-radius:6px;font-size:11px;outline:none;cursor:pointer}
+
+        /* PRODUCT ROW */
+        .prow{background:var(--w);padding:8px 10px;border-radius:8px;display:flex;align-items:center;gap:8px;margin-bottom:6px;border:1px solid var(--g);transition:var(--tr);font-size:11px}
+        .prow:hover{box-shadow:0 2px 6px rgba(0,0,0,0.04)}
+        .pimg{width:34px;height:34px;background:var(--lg);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden}
+        .pimg img{max-width:100%;max-height:100%;object-fit:contain}
+        .pimg i{color:var(--g);font-size:13px}
+        .pinfo{flex:1;min-width:0}
+        .pinfo h5{font-size:11px;margin-bottom:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+        .pinfo span{font-size:9px;color:var(--mg);display:flex;align-items:center;gap:2px;flex-wrap:wrap}
+        .ptag{font-size:8px;padding:1px 3px;border-radius:2px;font-weight:600}
+        .ptag.new{background:#D4EDDA;color:#155724}
+        .ptag.hot{background:var(--pl);color:var(--p)}
+        .ptag.sale{background:#F8D7DA;color:#721C24}
+        .ptag.flash{background:#CCE5FF;color:#004085}
+        .pprice{font-weight:700;color:var(--p);min-width:65px;font-size:11px;text-align:right}
+        .pprice s{color:var(--mg);font-weight:400;font-size:9px;margin-left:2px}
+        .pstock{min-width:50px;font-size:10px;text-align:center}
+        .pstock.low{color:var(--dn);font-weight:600}
+        .pacts{display:flex;gap:3px}
+        .pacts button{width:26px;height:26px;border:none;border-radius:5px;cursor:pointer;font-size:10px;display:flex;align-items:center;justify-content:center;transition:var(--tr)}
+        .bedit{background:#D1ECF1;color:#0C5460}
+        .bedit:hover{background:var(--i);color:white}
+        .bdel{background:#F8D7DA;color:#721C24}
+        .bdel:hover{background:var(--dn);color:white}
+
+        /* ADD BUTTON */
+        .badd{padding:7px 14px;background:var(--p);color:white;border:none;border-radius:8px;font-weight:600;cursor:pointer;font-size:11px;display:flex;align-items:center;gap:4px;transition:var(--tr)}
+        .badd:hover{background:var(--pd)}
+
+        /* FORM */
+        .pform{background:var(--w);padding:16px;border-radius:10px;margin-bottom:14px;display:none;animation:fadeIn 0.3s;border:2px solid var(--pl)}
+        .pform.show{display:block}
+        .pform h4{font-size:14px;color:var(--p);margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid var(--pl);display:flex;align-items:center;gap:5px}
+        .frow{display:flex;gap:10px}
+        .fgrp{flex:1;margin-bottom:10px}
+        .fgrp label{display:block;font-size:10px;font-weight:600;margin-bottom:3px}
+        .fgrp input,.fgrp select,.fgrp textarea{width:100%;padding:7px 9px;border:1px solid var(--g);border-radius:6px;font-size:12px;outline:none;font-family:inherit;transition:var(--tr)}
+        .fgrp input:focus,.fgrp select:focus,.fgrp textarea:focus{border-color:var(--p)}
+        .fgrp textarea{resize:vertical;min-height:50px}
+        .checkrow{display:flex;gap:12px;margin-bottom:10px;flex-wrap:wrap;padding:8px;background:var(--lg);border-radius:6px}
+        .chkitem{display:flex;align-items:center;gap:4px;font-size:11px;cursor:pointer;font-weight:500}
+        .chkitem input{accent-color:var(--p);width:14px;height:14px}
+        .fbtnrow{display:flex;gap:8px;margin-top:6px}
+        .bsave{padding:8px 18px;background:var(--s);color:white;border:none;border-radius:6px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:4px;font-size:12px;transition:var(--tr)}
+        .bsave:hover{background:#218838}
+        .bcancel{padding:8px 18px;background:var(--lg);border:1px solid var(--g);border-radius:6px;cursor:pointer;font-size:12px}
+
+        /* CATEGORIES */
+        .catgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+        .catcard{background:var(--w);padding:16px;border-radius:10px;text-align:center;box-shadow:var(--sh);transition:var(--tr);position:relative;border:2px solid transparent}
+        .catcard:hover{transform:translateY(-2px);border-color:var(--pl)}
+        .catcard i{font-size:24px;color:var(--p);margin-bottom:6px;display:block}
+        .catcard h5{font-size:12px;margin-bottom:3px}
+        .catcard span{font-size:10px;color:var(--mg)}
+        .catcard .catbadge{position:absolute;top:6px;right:6px;background:var(--p);color:white;font-size:9px;padding:1px 6px;border-radius:8px;font-weight:600}
+
+        /* TAB HEADER */
+        .tabheader{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:8px}
+        .tabheader h4{font-size:14px;display:flex;align-items:center;gap:6px}
+        .tabheader h4 i{color:var(--p);font-size:13px}
+
+        /* EMPTY & LOADING */
+        .empty2{text-align:center;padding:30px;color:var(--mg)}
+        .empty2 i{font-size:35px;color:var(--g);margin-bottom:10px;display:block}
+        .empty2 p{font-size:12px}
+        .loading2{text-align:center;padding:25px;color:var(--mg)}
+        .loading2 i{font-size:22px;color:var(--p);display:block;margin-bottom:8px;animation:spin 1s linear infinite}
+        .loading2 p{font-size:11px}
+
+        /* ALERT */
+        .newalert{position:fixed;top:15px;right:15px;background:var(--s);color:white;padding:10px 18px;border-radius:10px;box-shadow:0 4px 15px rgba(40,167,69,0.4);z-index:9999;display:none;animation:slideUp 0.4s;font-weight:600;font-size:12px;align-items:center;gap:6px}
+
+        /* RESPONSIVE */
+        @media(max-width:1024px){
+            .sgrid{grid-template-columns:repeat(2,1fr)}
+            .dgrid{grid-template-columns:1fr}
+            .catgrid{grid-template-columns:repeat(3,1fr)}
+        }
+        @media(max-width:768px){
+            .sd{transform:translateX(-100%)}
+            .sd.open{transform:translateX(0)}
+            .main{margin-left:0}
+            .mtoggle{display:block}
+            .content{padding:12px 10px}
+            .topbar2{padding:8px 12px}
+            .topbar2 h3{font-size:14px}
+            .sgrid{grid-template-columns:1fr 1fr;gap:8px}
+            .scard{padding:12px;gap:8px}
+            .sinfo h4{font-size:18px}
+            .sinfo p{font-size:9px}
+            .sicon{width:35px;height:35px;font-size:14px}
+            .orowb{grid-template-columns:1fr 1fr;gap:4px}
+            .frow{flex-direction:column;gap:0}
+            .catgrid{grid-template-columns:repeat(2,1fr);gap:8px}
+            .catcard{padding:12px}
+            .catcard i{font-size:20px}
+            .catcard h5{font-size:11px}
+            .lb{padding:28px 22px;margin:10px}
+            .lb h2{font-size:16px}
+            .licon{width:50px;height:50px}
+            .licon i{font-size:22px}
+            .prow{padding:6px 8px;gap:6px}
+            .pimg{width:30px;height:30px}
+            .pinfo h5{font-size:10px}
+            .pprice{font-size:10px;min-width:55px}
+            .pacts button{width:24px;height:24px;font-size:9px}
+            .filtbtns{gap:4px}
+            .filtb{padding:5px 10px;font-size:10px}
+        }
+        @media(max-width:480px){
+            .sgrid{grid-template-columns:1fr;gap:6px}
+            .orowb{grid-template-columns:1fr;gap:3px}
+            .catgrid{grid-template-columns:1fr 1fr;gap:6px}
+            .prow{flex-wrap:wrap}
+            .pprice,.pstock{min-width:auto}
+            .pstock{display:none}
+            .scard{padding:10px}
+            .sinfo h4{font-size:16px}
+        }
+    </style>
+</head>
 <body>
+<div class="newalert" id="alertBox" style="display:none;"><i class="fas fa-bell"></i> <span id="alertText"></span></div>
 
-<div class="cart-notification" id="cartNotification">
-    <i class="fas fa-check-circle"></i>
-    <span id="cartNotifText">Added to cart!</span>
-</div>
-
-<!-- AUTH -->
-<div class="modal-overlay" id="authModal">
-    <div class="modal" style="max-width:440px;">
-        <button class="modal-close" onclick="closeAuth()"><i class="fas fa-times"></i></button>
-        <div style="padding:30px;">
-            <div id="loginTab" class="auth-tab active">
-                <div class="auth-header">
-                    <div class="auth-icon"><i class="fas fa-user-circle"></i></div>
-                    <h2>Welcome Back</h2>
-                    <p style="color:var(--medium-gray);font-size:14px;">Login to continue</p>
-                </div>
-                <form onsubmit="loginCustomer(event)">
-                    <div class="form-group"><label>Phone Number</label><input type="tel" id="loginPhone" required placeholder="03XXXXXXXXX"></div>
-                    <div class="form-group"><label>Password</label><input type="password" id="loginPass" required placeholder="Password" minlength="4"></div>
-                    <div id="loginError" class="auth-error"></div>
-                    <button type="submit" class="btn-auth"><i class="fas fa-sign-in-alt"></i> Login</button>
-                </form>
-                <p style="text-align:center;margin-top:15px;font-size:14px;">No account? <a href="#" onclick="switchAuth('register')" style="color:var(--primary);font-weight:600;">Register</a></p>
-            </div>
-            <div id="registerTab" class="auth-tab">
-                <div class="auth-header">
-                    <div class="auth-icon"><i class="fas fa-user-plus"></i></div>
-                    <h2>Create Account</h2>
-                    <p style="color:var(--medium-gray);font-size:14px;">Register to shop</p>
-                </div>
-                <form onsubmit="registerCustomer(event)">
-                    <div class="form-group"><label>Full Name *</label><input type="text" id="regName" required placeholder="Your name"></div>
-                    <div class="form-group"><label>Phone *</label><input type="tel" id="regPhone" required placeholder="03XXXXXXXXX"></div>
-                    <div class="form-group"><label>Email</label><input type="email" id="regEmail" placeholder="email@example.com"></div>
-                    <div class="form-group"><label>City *</label>
-                        <select id="regCity" required><option value="">Select</option><option>Karachi</option><option>Lahore</option><option>Islamabad</option><option>Rawalpindi</option><option>Faisalabad</option><option>Peshawar</option><option>Quetta</option><option>Multan</option><option>Abbottabad</option><option>Other</option></select>
-                    </div>
-                    <div class="form-group"><label>Address *</label><textarea id="regAddress" required placeholder="House, Street, Area"></textarea></div>
-                    <div class="form-group"><label>Password *</label><input type="password" id="regPass" required placeholder="Min 4 chars" minlength="4"></div>
-                    <div id="regError" class="auth-error"></div>
-                    <button type="submit" class="btn-auth"><i class="fas fa-user-plus"></i> Register</button>
-                </form>
-                <p style="text-align:center;margin-top:15px;font-size:14px;">Have account? <a href="#" onclick="switchAuth('login')" style="color:var(--primary);font-weight:600;">Login</a></p>
-            </div>
+<!-- LOGIN -->
+<div class="ls" id="loginScreen">
+    <div class="lb">
+        <div class="licon"><i class="fas fa-lock"></i></div>
+        <h2>Admin Login</h2>
+        <p>Enter password</p>
+        <div class="linp">
+            <input type="password" id="passInput" placeholder="Password" maxlength="20" onkeydown="if(event.key==='Enter')checkLogin()" oninput="clearLoginErr()">
+            <button class="eyeb" onclick="toggleEye()"><i class="fas fa-eye" id="eyeIcon"></i></button>
         </div>
+        <div class="lerr" id="loginErr"><i class="fas fa-exclamation-circle"></i> <span id="loginErrText"></span></div>
+        <button class="lbtn" id="loginBtn" onclick="checkLogin()"><i class="fas fa-unlock-alt"></i> Login</button>
+        <div class="lfooter" id="loginFooter"><i class="fas fa-shield-alt" style="color:var(--p)"></i> Protected</div>
+        <a href="index.html" class="backl"><i class="fas fa-arrow-left"></i> Store</a>
     </div>
 </div>
 
-<!-- QUICK VIEW -->
-<div class="modal-overlay" id="quickViewModal">
-    <div class="modal">
-        <button class="modal-close" onclick="closeQuickView()"><i class="fas fa-times"></i></button>
-        <div class="modal-body">
-            <div class="modal-image" id="modalImageContainer"></div>
-            <div class="modal-info">
-                <span class="modal-category" id="modalCategory"></span>
-                <h2 id="modalName"></h2>
-                <div class="modal-rating"><span id="modalStars"></span><span id="modalReviews"></span></div>
-                <div class="modal-price">
-                    <span class="current-price" id="modalPrice"></span>
-                    <span class="old-price" id="modalOldPrice"></span>
-                    <span class="discount-badge" id="modalDiscount"></span>
+<!-- ADMIN -->
+<div class="adm" id="adminPanel">
+    <aside class="sd" id="sidebar">
+        <div class="sdh"><div class="lgic"><i class="fas fa-bolt"></i></div><div><h2>Electro<span>Hub</span></h2><small>Admin</small></div></div>
+        <nav class="sdnav">
+            <a class="act" onclick="switchTab('dash',this)"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+            <a onclick="switchTab('orders',this)"><i class="fas fa-shopping-bag"></i> Orders <span class="nbg" id="navOrders">0</span></a>
+            <a onclick="switchTab('products',this)"><i class="fas fa-box"></i> Products <span class="nbg" id="navProds">0</span></a>
+            <a onclick="switchTab('categories',this)"><i class="fas fa-tags"></i> Categories</a>
+            <div class="ndiv"></div>
+            <a onclick="switchTab('customers',this)"><i class="fas fa-users"></i> Customers <span class="nbg" id="navCusts">0</span></a>
+        </nav>
+        <div class="sdft"><a onclick="adminLogout()"><i class="fas fa-sign-out-alt"></i> Logout</a></div>
+    </aside>
+
+    <div class="main">
+        <div class="topbar2">
+            <div style="display:flex;align-items:center;gap:10px;">
+                <button class="mtoggle" onclick="document.getElementById('sidebar').classList.toggle('open')"><i class="fas fa-bars"></i></button>
+                <h3 id="pageTitle"><i class="fas fa-tachometer-alt"></i> Dashboard</h3>
+            </div>
+            <div class="tright">
+                <button class="rfbtn" id="refreshBtn" onclick="doRefresh()"><i class="fas fa-sync-alt"></i></button>
+                <a href="index.html" class="stlink"><i class="fas fa-store"></i> Store</a>
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- DASHBOARD -->
+            <div class="atab act" id="dashTab">
+                <div class="sgrid">
+                    <div class="scard"><div class="sicon bl"><i class="fas fa-shopping-bag"></i></div><div class="sinfo"><h4 id="statOrders">0</h4><p>Orders</p></div></div>
+                    <div class="scard"><div class="sicon gr"><i class="fas fa-money-bill-wave"></i></div><div class="sinfo"><h4 id="statRevenue">Rs.0</h4><p>Revenue</p></div></div>
+                    <div class="scard"><div class="sicon or"><i class="fas fa-box"></i></div><div class="sinfo"><h4 id="statProducts">0</h4><p>Products</p></div></div>
+                    <div class="scard"><div class="sicon rd"><i class="fas fa-clock"></i></div><div class="sinfo"><h4 id="statPending">0</h4><p>Pending</p></div></div>
                 </div>
-                <p id="modalDescription"></p>
-                <div class="modal-meta">
-                    <span><i class="fas fa-check-circle"></i> <span id="modalStock"></span></span>
-                    <span><i class="fas fa-shield-alt"></i> Warranty</span>
-                    <span id="modalDelivery"></span>
-                </div>
-                <style>
-                    html {
-    font-size: 14px;
-    -webkit-text-size-adjust: 100%;
-}
-
-body {
-    overflow-x: hidden;
-    width: 100%;
-}
-
-* {
-    max-width: 100%;
-}
-                    /* PRODUCT ROW FIX */
-.prow {
-    background: var(--w);
-    padding: 10px 12px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 6px;
-    border: 1px solid var(--g);
-    transition: var(--tr);
-    font-size: 12px;
-}
-
-.prow:hover {
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-}
-
-.pimg {
-    width: 36px;
-    height: 36px;
-    background: var(--lg);
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    overflow: hidden;
-}
-
-.pimg img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-}
-
-.pimg i {
-    color: var(--g);
-    font-size: 14px;
-}
-
-.pinfo {
-    flex: 1;
-    min-width: 0;
-}
-
-.pinfo h5 {
-    font-size: 12px;
-    margin-bottom: 2px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.pinfo span {
-    font-size: 10px;
-    color: var(--mg);
-    display: flex;
-    align-items: center;
-    gap: 3px;
-    flex-wrap: wrap;
-}
-
-.ptag {
-    font-size: 8px;
-    padding: 1px 4px;
-    border-radius: 3px;
-    font-weight: 600;
-}
-
-.pprice {
-    font-weight: 700;
-    color: var(--p);
-    min-width: 70px;
-    font-size: 12px;
-    text-align: right;
-}
-
-.pprice s {
-    color: var(--mg);
-    font-weight: 400;
-    font-size: 10px;
-    margin-left: 3px;
-}
-
-.pstock {
-    min-width: 55px;
-    font-size: 11px;
-    text-align: center;
-}
-
-.pacts {
-    display: flex;
-    gap: 4px;
-}
-
-.pacts button {
-    width: 28px;
-    height: 28px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 11px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* FORM FIX */
-.pform {
-    background: var(--w);
-    padding: 20px;
-    border-radius: 12px;
-    margin-bottom: 15px;
-    display: none;
-    animation: fadeIn 0.3s;
-    border: 2px solid var(--pl);
-}
-
-.pform.show {
-    display: block;
-}
-
-.pform h4 {
-    font-size: 15px;
-    color: var(--p);
-    margin-bottom: 14px;
-    padding-bottom: 8px;
-    border-bottom: 2px solid var(--pl);
-}
-
-.fgrp label {
-    font-size: 11px;
-}
-
-.fgrp input, .fgrp select, .fgrp textarea {
-    padding: 8px 10px;
-    font-size: 12px;
-}
-
-.checkrow {
-    padding: 8px;
-    gap: 12px;
-}
-
-.chkitem {
-    font-size: 12px;
-}
-
-.chkitem input {
-    width: 14px;
-    height: 14px;
-}
-
-/* TAB HEADER */
-.tabheader h4 {
-    font-size: 15px;
-}
-
-.badd {
-    padding: 8px 16px;
-    font-size: 12px;
-}
-
-/* MOBILE FIX */
-@media (max-width: 768px) {
-    .prow {
-        padding: 8px;
-        gap: 8px;
-    }
-    .pimg {
-        width: 32px;
-        height: 32px;
-    }
-    .pinfo h5 {
-        font-size: 11px;
-    }
-    .pprice {
-        font-size: 11px;
-        min-width: 60px;
-    }
-    .pstock {
-        display: none;
-    }
-    .pacts button {
-        width: 26px;
-        height: 26px;
-        font-size: 10px;
-    }
-}</style>
-                <div class="modal-quantity">
-                    <label>Qty:</label>
-                    <div class="qty-selector">
-                        <button onclick="changeQty(-1)">-</button>
-                        <input type="number" id="modalQty" value="1" min="1" max="10">
-                        <button onclick="changeQty(1)">+</button>
+                <div class="dgrid">
+                    <div class="card2"><h4><i class="fas fa-clock"></i> Recent Orders</h4><div id="recentOrdersDiv"></div></div>
+                    <div>
+                        <div class="card2"><h4><i class="fas fa-chart-pie"></i> Status</h4><div id="statusSumDiv"></div></div>
+                        <div class="card2"><h4><i class="fas fa-exclamation-triangle"></i> Low Stock</h4><div id="lowStockDiv"></div></div>
                     </div>
                 </div>
-                <div class="modal-actions">
-                    <button class="btn-add-cart" onclick="addToCartFromModal()"><i class="fas fa-cart-plus"></i> Add to Cart</button>
-                    <button class="btn-buy-now" onclick="buyNowFromModal()"><i class="fas fa-bolt"></i> Buy Now</button>
-                </div>
             </div>
-        </div>
-    </div>
-</div>
 
-<!-- CHECKOUT -->
-<div class="modal-overlay" id="checkoutModal">
-    <div class="modal checkout-modal">
-        <button class="modal-close" onclick="closeCheckout()"><i class="fas fa-times"></i></button>
-        <div class="checkout-container">
-            <h2><i class="fas fa-shopping-bag"></i> Checkout</h2>
-            <div class="checkout-grid">
-                <div class="checkout-form-section">
-                    <h3>Delivery Info</h3>
-                    <div id="loggedUserInfo" style="display:none;" class="logged-user-info"></div>
-                    <form id="checkoutForm" onsubmit="placeOrder(event)">
-                        <div class="form-row">
-                            <div class="form-group"><label>Name *</label><input type="text" id="custName" required></div>
-                            <div class="form-group"><label>Phone *</label><input type="tel" id="custPhone" required></div>
-                        </div>
-                        <div class="form-group"><label>Email</label><input type="email" id="custEmail"></div>
-                        <div class="form-row">
-                            <div class="form-group"><label>City *</label>
-                                <select id="custCity" required><option value="">Select</option><option>Karachi</option><option>Lahore</option><option>Islamabad</option><option>Rawalpindi</option><option>Faisalabad</option><option>Peshawar</option><option>Quetta</option><option>Multan</option><option>Abbottabad</option><option>Other</option></select>
-                            </div>
-                            <div class="form-group"><label>Postal</label><input type="text" id="custPostal"></div>
-                        </div>
-                        <div class="form-group"><label>Address *</label><textarea id="custAddress" required placeholder="House, Street, Area"></textarea></div>
-                        <div class="form-group"><label>Notes</label><textarea id="custNotes" placeholder="Instructions..."></textarea></div>
-                        <div class="payment-method">
-                            <h3><i class="fas fa-money-bill-wave"></i> Payment</h3>
-                            <div class="cod-box">
-                                <input type="radio" id="cod" name="payment" checked>
-                                <label for="cod"><i class="fas fa-hand-holding-usd"></i>
-                                    <div><strong>Cash on Delivery</strong><p>Pay when you receive</p></div>
-                                </label>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn-place-order"><i class="fas fa-lock"></i> Place Order</button>
-                    </form>
+            <!-- ORDERS -->
+            <div class="atab" id="ordersTab">
+                <div class="filtbtns">
+                    <button class="filtb act" onclick="filterOrders('all',this)">All</button>
+                    <button class="filtb" onclick="filterOrders('Pending',this)">🟡 Pending</button>
+                    <button class="filtb" onclick="filterOrders('Confirmed',this)">🔵 Confirmed</button>
+                    <button class="filtb" onclick="filterOrders('Shipped',this)">🚚 Shipped</button>
+                    <button class="filtb" onclick="filterOrders('Delivered',this)">✅ Delivered</button>
+                    <button class="filtb" onclick="filterOrders('Cancelled',this)">❌ Cancelled</button>
                 </div>
-                <div class="order-summary-section">
-                    <h3>Summary</h3>
-                    <div id="checkoutItems"></div>
-                    <div class="summary-totals">
-                        <div class="summary-row"><span>Subtotal</span><span id="summarySubtotal">Rs. 0</span></div>
-                        <div class="summary-row"><span>Delivery</span><span id="summaryDelivery">Rs. 150</span></div>
-                        <div class="summary-row discount-row" id="summaryDiscountRow" style="display:none;"><span>Discount</span><span id="summaryDiscount">-Rs. 0</span></div>
-                        <div class="summary-row total-row"><span>Total</span><span id="summaryTotal">Rs. 0</span></div>
+                <div id="ordersListDiv"></div>
+            </div>
+
+            <!-- PRODUCTS -->
+            <div class="atab" id="productsTab">
+                <div class="tabheader">
+                    <h4><i class="fas fa-box"></i> Products</h4>
+                    <button class="badd" onclick="showAddForm()"><i class="fas fa-plus"></i> Add</button>
+                </div>
+                <div class="pform" id="productForm">
+                    <h4><i class="fas fa-edit"></i> <span id="formTitle">Add Product</span></h4>
+                    <div class="frow">
+                        <div class="fgrp"><label>Name *</label><input type="text" id="fName" placeholder="Product name"></div>
+                        <div class="fgrp"><label>Category *</label>
+                            <select id="fCategory"><option value="chargers">⚡ Chargers</option><option value="cables">🔌 Cables</option><option value="earphones">🎧 Earphones</option><option value="powerbanks">🔋 Power Banks</option><option value="holders">📱 Holders</option><option value="watches">⌚ Watches</option><option value="protectors">🛡️ Protectors</option><option value="covers">📦 Covers</option><option value="speakers">🔊 Speakers</option><option value="adapters">🔄 Adapters</option><option value="lights">💡 Lights</option><option value="stands">🖥️ Stands</option><option value="keyboards">⌨️ Keyboards</option><option value="storage">💾 Storage</option><option value="cameras">📸 Cameras</option><option value="other">📦 Other</option></select>
+                        </div>
                     </div>
-                    <div class="promo-code"><input type="text" id="promoInput" placeholder="Promo code" onfocus="showPromoHint()" style="text-transform:uppercase;"><button onclick="applyPromo()">Apply</button></div>
+                    <div class="frow">
+                        <div class="fgrp"><label>Price *</label><input type="number" id="fPrice" placeholder="1499"></div>
+                        <div class="fgrp"><label>Old Price</label><input type="number" id="fOldPrice" placeholder="2999"></div>
+                        <div class="fgrp"><label>Stock *</label><input type="number" id="fStock" placeholder="50"></div>
+                    </div>
+                    <div class="fgrp"><label>Image URL</label><input type="text" id="fImage" placeholder="https://..."></div>
+                    <div class="fgrp"><label>Description</label><textarea id="fDesc" placeholder="Description..."></textarea></div>
+                    <div class="checkrow">
+                        <label class="chkitem"><input type="checkbox" id="fIsNew"> 🆕 New</label>
+                        <label class="chkitem"><input type="checkbox" id="fIsHot"> 🔥 Hot</label>
+                        <label class="chkitem"><input type="checkbox" id="fIsSale"> 💰 Sale</label>
+                        <label class="chkitem"><input type="checkbox" id="fIsFlash"> ⚡ Flash</label>
+                    </div>
+                    <div class="fbtnrow">
+                        <button class="bsave" id="saveBtn" onclick="saveProduct()"><i class="fas fa-save"></i> Save</button>
+                        <button class="bcancel" onclick="hideForm()">Cancel</button>
+                    </div>
                 </div>
+                <div id="productsListDiv"></div>
+            </div>
+
+            <!-- CATEGORIES -->
+            <div class="atab" id="categoriesTab">
+                <div class="tabheader"><h4><i class="fas fa-tags"></i> Categories</h4></div>
+                <div class="catgrid" id="categoriesDiv"></div>
+            </div>
+
+            <!-- CUSTOMERS -->
+            <div class="atab" id="customersTab">
+                <div class="tabheader"><h4><i class="fas fa-users"></i> Customers</h4></div>
+                <div id="customersDiv"></div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- SUCCESS -->
-<div class="modal-overlay" id="orderSuccessModal">
-    <div class="modal success-modal">
-        <div class="success-content">
-            <div class="success-icon"><i class="fas fa-check-circle"></i></div>
-            <h2>Order Placed!</h2>
-            <p>Thank you for your order</p>
-            <div class="order-details-box">
-                <div class="order-detail-row"><span>Order ID:</span><strong id="successOrderId"></strong></div>
-                <div class="order-detail-row"><span>Status:</span><strong style="color:var(--warning);">Pending</strong></div>
-                <div class="order-detail-row"><span>Payment:</span><strong>Cash on Delivery</strong></div>
-                <div class="order-detail-row"><span>Total:</span><strong id="successTotal"></strong></div>
-            </div>
-            <div class="success-actions">
-                <button onclick="openTrackingFromSuccess()" class="btn-view-orders"><i class="fas fa-search"></i> Track</button>
-                <button onclick="continueShopping()" class="btn-continue"><i class="fas fa-shopping-bag"></i> Continue</button>
-            </div>
-        </div>
-    </div>
-</div>
+<script>
+var SB='https://iguhpaqocjxwtfkpbgbg.supabase.co',SK='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlndWhwYXFvY2p4d3Rma3BiZ2JnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODUyNTEyMjQsImV4cCI6MjEwMDgyNzIyNH0.BrJb1CuFopsT4cQQtb4hf9jGznXxjcPnA-DsJ9vwmsc',HH={'apikey':SK,'Authorization':'Bearer '+SK,'Content-Type':'application/json','Prefer':'return=representation'};
+async function api(m,t,p,b){try{var u=SB+'/rest/v1/'+t;if(p)u+='?'+p;var o={method:m,headers:HH};if(b)o.body=JSON.stringify(b);var r=await fetch(u,o);if(!r.ok){console.error(m+' '+t+':',await r.text());return m==='DELETE'?false:[];}return m==='DELETE'?true:await r.json();}catch(e){console.error(e);return m==='DELETE'?false:[];}}
+var PASS="28610",attempts=0,orders=[],products=[],lastCount=0,editingId=null;
+var ICONS={chargers:'fas fa-charging-station',cables:'fas fa-plug',earphones:'fas fa-headphones-alt',powerbanks:'fas fa-battery-full',holders:'fas fa-mobile-alt',watches:'fas fa-clock',protectors:'fas fa-shield-alt',covers:'fas fa-tablet-alt',speakers:'fas fa-volume-up',adapters:'fas fa-exchange-alt',lights:'fas fa-lightbulb',stands:'fas fa-laptop',keyboards:'fas fa-keyboard',storage:'fas fa-hdd',cameras:'fas fa-camera',other:'fas fa-box'};
+var NAMES={chargers:'Chargers',cables:'Cables',earphones:'Earphones',powerbanks:'Power Banks',holders:'Holders',watches:'Watches',protectors:'Protectors',covers:'Covers',speakers:'Speakers',adapters:'Adapters',lights:'Lights',stands:'Stands',keyboards:'Keyboards',storage:'Storage',cameras:'Cameras',other:'Other'};
 
-<!-- TRACKING -->
-<div class="modal-overlay" id="trackingModal">
-    <div class="modal" style="max-width:600px;">
-        <button class="modal-close" onclick="closeTracking()"><i class="fas fa-times"></i></button>
-        <div style="padding:30px;">
-            <h2 style="display:flex;align-items:center;gap:10px;margin-bottom:20px;"><i class="fas fa-shipping-fast" style="color:var(--primary);"></i> Track Order</h2>
-            <div class="form-group"><label>Order ID</label>
-                <div style="display:flex;gap:10px;"><input type="text" id="trackOrderInput" placeholder="EH-00001" style="flex:1;"><button onclick="trackOrder()" class="btn-primary" style="white-space:nowrap;"><i class="fas fa-search"></i> Track</button></div>
-            </div>
-            <div id="myOrdersList"></div>
-            <div id="trackingResult"></div>
-        </div>
-    </div>
-</div>
+if(sessionStorage.getItem('adminOK')==='1'){document.getElementById('loginScreen').classList.add('h');document.getElementById('adminPanel').classList.add('sh');startAdmin();}
+function checkLogin(){var inp=document.getElementById('passInput'),btn=document.getElementById('loginBtn'),val=inp.value.trim();if(!val){showLoginErr('Enter password');inp.classList.add('err');setTimeout(function(){inp.classList.remove('err');},500);return;}if(val===PASS){inp.classList.add('ok');btn.innerHTML='<i class="fas fa-check-circle"></i> Granted!';btn.classList.add('ok');sessionStorage.setItem('adminOK','1');setTimeout(function(){document.getElementById('loginScreen').classList.add('h');document.getElementById('adminPanel').classList.add('sh');startAdmin();},700);}else{attempts++;inp.classList.add('err');setTimeout(function(){inp.classList.remove('err');},500);if(attempts>=5){showLoginErr('Locked 30s');btn.disabled=true;inp.disabled=true;var t=30,f=document.getElementById('loginFooter');f.innerHTML='<span style="color:var(--dn)"><i class="fas fa-lock"></i> '+t+'s</span>';var timer=setInterval(function(){t--;f.innerHTML='<span style="color:var(--dn)">'+t+'s</span>';if(t<=0){clearInterval(timer);attempts=0;btn.disabled=false;inp.disabled=false;inp.value='';clearLoginErr();f.innerHTML='<i class="fas fa-shield-alt" style="color:var(--p)"></i> Protected';}},1000);}else showLoginErr('Wrong! '+(5-attempts)+' left');}}
+function showLoginErr(m){document.getElementById('loginErrText').textContent=m;document.getElementById('loginErr').classList.add('sh');}
+function clearLoginErr(){document.getElementById('loginErr').classList.remove('sh');}
+function toggleEye(){var i=document.getElementById('passInput'),e=document.getElementById('eyeIcon');if(i.type==='password'){i.type='text';e.className='fas fa-eye-slash';}else{i.type='password';e.className='fas fa-eye';}i.focus();}
+function adminLogout(){sessionStorage.removeItem('adminOK');location.reload();}
 
-<!-- CART -->
-<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
-<div class="cart-sidebar" id="cartSidebar">
-    <div class="cart-header"><h3><i class="fas fa-shopping-cart"></i> Cart (<span id="cartHeaderCount">0</span>)</h3><button onclick="closeCart()"><i class="fas fa-times"></i></button></div>
-    <div class="cart-items" id="cartItems"></div>
-    <div class="cart-footer" id="cartFooter" style="display:none;">
-        <div class="cart-total"><span>Subtotal:</span><span id="cartTotal">Rs. 0</span></div>
-        <button class="btn-checkout" onclick="proceedToCheckout()"><i class="fas fa-lock"></i> Checkout</button>
-        <button class="btn-clear-cart" onclick="clearCart()"><i class="fas fa-trash"></i> Clear</button>
-    </div>
-</div>
+async function startAdmin(){showLoad('recentOrdersDiv');showLoad('ordersListDiv');showLoad('productsListDiv');await loadAllData();setInterval(async function(){var n=await api('GET','orders','select=id&order=created_at.desc');if(n&&n.length>lastCount){showAlert('🔔 New order!');lastCount=n.length;await loadAllData();}},5000);}
+async function loadAllData(){orders=await api('GET','orders','select=*&order=created_at.desc');products=await api('GET','products','select=*&order=id.asc');var custs=await api('GET','customers','select=*&order=created_at.desc');lastCount=orders.length;document.getElementById('navOrders').textContent=orders.length;document.getElementById('navProds').textContent=products.length;document.getElementById('navCusts').textContent=custs?custs.length:0;var pend=orders.filter(function(o){return o.status==='Pending';}).length;if(pend>0)document.getElementById('navOrders').classList.add('red');else document.getElementById('navOrders').classList.remove('red');renderDashboard();renderOrdersList();renderProductsList();renderCategories();renderCustomers(custs);}
+async function doRefresh(){var b=document.getElementById('refreshBtn');b.classList.add('spinning');await loadAllData();setTimeout(function(){b.classList.remove('spinning');},500);}
+function showLoad(id){document.getElementById(id).innerHTML='<div class="loading2"><i class="fas fa-spinner"></i><p>Loading...</p></div>';}
+function showAlert(t){var a=document.getElementById('alertBox');document.getElementById('alertText').textContent=t;a.style.display='flex';setTimeout(function(){a.style.display='none';},5000);}
+function timeAgo(d){var df=Date.now()-new Date(d).getTime(),m=Math.floor(df/60000);if(m<1)return'Now';if(m<60)return m+'m';var h=Math.floor(m/60);if(h<24)return h+'h';return Math.floor(h/24)+'d';}
+function switchTab(t,el){document.querySelectorAll('.atab').forEach(function(x){x.classList.remove('act');});document.getElementById(t+'Tab').classList.add('act');document.querySelectorAll('.sdnav a').forEach(function(a){a.classList.remove('act');});if(el)el.classList.add('act');var ti={dash:'Dashboard',orders:'Orders',products:'Products',categories:'Categories',customers:'Customers'},ic={dash:'tachometer-alt',orders:'shopping-bag',products:'box',categories:'tags',customers:'users'};document.getElementById('pageTitle').innerHTML='<i class="fas fa-'+ic[t]+'"></i> '+ti[t];document.getElementById('sidebar').classList.remove('open');}
 
-<!-- TOPBAR -->
-<div class="topbar">
-    <div class="container">
-        <div class="topbar-left">
-            <span><i class="fas fa-phone-alt"></i> +92 300 1234567</span>
-            <span><i class="fas fa-envelope"></i> info@electrohub.pk</span>
-        </div>
-        <div class="topbar-right">
-            <a href="#" onclick="showPage('about')">About</a>
-            <a href="#" onclick="showPage('contact')">Contact</a>
-            <a href="#" onclick="openTrackingModal()"><i class="fas fa-truck"></i> Track</a>
-            <span id="userTopBar"></span>
-        </div>
-    </div>
-</div>
+function renderDashboard(){document.getElementById('statOrders').textContent=orders.length;var rev=0;orders.forEach(function(o){if(o.status!=='Cancelled')rev+=o.total;});document.getElementById('statRevenue').textContent='Rs.'+rev.toLocaleString();document.getElementById('statProducts').textContent=products.length;var pend=orders.filter(function(o){return o.status==='Pending';}).length;document.getElementById('statPending').textContent=pend;var rec=orders.slice(0,5);document.getElementById('recentOrdersDiv').innerHTML=rec.length?rec.map(function(o){return'<div class="orow'+(o.status==='Pending'?' neworder':'')+'" style="padding:8px;margin-bottom:5px;"><div class="orowh"><h5>'+o.id+'</h5><span style="font-size:9px;color:var(--mg)">'+timeAgo(o.created_at)+'</span><span class="sbadge s-'+o.status+'">'+o.status+'</span></div><div style="display:flex;justify-content:space-between;font-size:10px;flex-wrap:wrap;gap:3px;"><span>'+o.customer_name+'</span><span>'+o.customer_phone+'</span><strong style="color:var(--p)">Rs.'+o.total.toLocaleString()+'</strong></div></div>';}).join(''):'<div class="empty2"><i class="fas fa-inbox"></i><p>No orders</p></div>';var sts=['Pending','Confirmed','Shipped','Delivered','Cancelled'];document.getElementById('statusSumDiv').innerHTML=sts.map(function(s){return'<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--g);font-size:11px;"><span class="sbadge s-'+s+'">'+s+'</span><strong>'+orders.filter(function(o){return o.status===s;}).length+'</strong></div>';}).join('');var low=products.filter(function(p){return p.stock<=10;}).sort(function(a,b){return a.stock-b.stock;}).slice(0,5);document.getElementById('lowStockDiv').innerHTML=low.length?low.map(function(p){return'<div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--g);font-size:10px;"><span>'+p.name.substring(0,20)+'...</span><strong style="color:'+(p.stock<=0?'var(--dn)':'var(--wn)')+'">'+( p.stock<=0?'OUT':p.stock)+'</strong></div>';}).join(''):'<p style="color:var(--mg);text-align:center;padding:10px;font-size:10px;">All stocked ✅</p>';}
 
-<!-- HEADER -->
-<header class="header" id="header">
-    <div class="container">
-        <div class="header-content">
-            <div class="logo" onclick="showPage('home')"><i class="fas fa-bolt"></i><span>Electro<strong>Hub</strong></span></div>
-            <div class="search-bar">
-                <select id="searchCategory"><option value="all">All</option><option value="chargers">Chargers</option><option value="cables">Cables</option><option value="earphones">Earphones</option><option value="powerbanks">Power Banks</option><option value="watches">Watches</option><option value="speakers">Speakers</option><option value="covers">Covers</option><option value="adapters">Adapters</option><option value="lights">Lights</option><option value="stands">Stands</option><option value="keyboards">Keyboards</option><option value="storage">Storage</option><option value="cameras">Cameras</option><option value="holders">Holders</option><option value="protectors">Protectors</option></select>
-                <input type="text" id="searchInput" placeholder="Search products..." onkeyup="handleSearch(event)">
-                <button onclick="searchProducts()"><i class="fas fa-search"></i></button>
-            </div>
-            <div class="header-actions">
-                <button class="header-btn" id="headerUserBtn" onclick="handleUserClick()"><i class="fas fa-user"></i><span id="headerUserText">Login</span></button>
-                <button class="header-btn" onclick="openCart()"><i class="fas fa-shopping-cart"></i><span>Cart</span><span class="cart-badge" id="cartBadge">0</span></button>
-            </div>
-        </div>
-    </div>
-</header>
+function renderOrdersList(filter){var fl=orders;if(filter&&filter!=='all')fl=orders.filter(function(o){return o.status===filter;});var el=document.getElementById('ordersListDiv');if(!fl.length){el.innerHTML='<div class="empty2"><i class="fas fa-inbox"></i><p>No orders</p></div>';return;}el.innerHTML=fl.map(function(o){var items=o.items||[];var ih=items.map(function(it){return'<div class="oiline"><span>'+it.name+' × '+it.qty+'</span><strong>Rs.'+(it.price*it.qty).toLocaleString()+'</strong></div>';}).join('');return'<div class="orow"><div class="orowh"><h5><i class="fas fa-receipt"></i> '+o.id+'</h5><span style="font-size:9px;color:var(--mg)">'+new Date(o.created_at).toLocaleString()+'</span><span class="sbadge s-'+o.status+'">'+o.status+'</span></div><div class="orowb"><span>Customer<strong>'+o.customer_name+'</strong></span><span>Phone<strong>'+o.customer_phone+'</strong></span><span>Email<strong>'+(o.customer_email||'N/A')+'</strong></span><span>City<strong>'+o.customer_city+'</strong></span><span>Address<strong>'+(o.customer_address||'').substring(0,40)+'</strong></span><span>Payment<strong>COD</strong></span></div><div class="oitems"><h6><i class="fas fa-box"></i> Items ('+items.length+')</h6>'+ih+'</div>'+(o.notes?'<div style="background:#FFF3E6;padding:5px 8px;border-radius:5px;font-size:10px;margin-bottom:6px;"><i class="fas fa-sticky-note" style="color:var(--p)"></i> '+o.notes+'</div>':'')+'<div class="orowf"><div style="display:flex;align-items:center;gap:6px;"><label style="font-size:10px;font-weight:600;">Status:</label><select class="ssel" onchange="updateStatus(\''+o.id+'\',this.value)"><option value="Pending"'+(o.status==='Pending'?' selected':'')+'>🟡 Pending</option><option value="Confirmed"'+(o.status==='Confirmed'?' selected':'')+'>🔵 Confirmed</option><option value="Shipped"'+(o.status==='Shipped'?' selected':'')+'>🚚 Shipped</option><option value="Delivered"'+(o.status==='Delivered'?' selected':'')+'>✅ Delivered</option><option value="Cancelled"'+(o.status==='Cancelled'?' selected':'')+'>❌ Cancelled</option></select></div><span class="ototal">Rs.'+o.total.toLocaleString()+'</span></div></div>';}).join('');}
+function filterOrders(s,btn){document.querySelectorAll('.filtb').forEach(function(b){b.classList.remove('act');});btn.classList.add('act');renderOrdersList(s);}
+async function updateStatus(id,status){var o=orders.find(function(x){return x.id===id;});if(!o)return;var sh=o.status_history||[];sh.push({status:status,time:new Date().toISOString(),note:'Admin'});var data={status:status,status_history:sh};if(status==='Shipped')data.estimated_delivery=new Date(Date.now()+3*86400000).toISOString();if(status==='Delivered')data.delivered_at=new Date().toISOString();var r=await api('PATCH','orders','id=eq.'+id,data);if(r){o.status=status;o.status_history=sh;renderDashboard();renderOrdersList();showAlert('✅ '+id+' → '+status);}else alert('Failed!');}
 
-<!-- NAV -->
-<nav class="category-nav"><div class="container">
-    <div class="cat-nav-items" id="catNavItems">
-        <a href="#" onclick="showPage('shop')" class="cat-nav-item"><i class="fas fa-th-large"></i> All</a>
-        <a href="#" onclick="filterByCategory('chargers')" class="cat-nav-item"><i class="fas fa-charging-station"></i> Chargers</a>
-        <a href="#" onclick="filterByCategory('cables')" class="cat-nav-item"><i class="fas fa-plug"></i> Cables</a>
-        <a href="#" onclick="filterByCategory('earphones')" class="cat-nav-item"><i class="fas fa-headphones-alt"></i> Earphones</a>
-        <a href="#" onclick="filterByCategory('powerbanks')" class="cat-nav-item"><i class="fas fa-battery-full"></i> Power Banks</a>
-        <a href="#" onclick="filterByCategory('watches')" class="cat-nav-item"><i class="fas fa-clock"></i> Watches</a>
-        <a href="#" onclick="filterByCategory('speakers')" class="cat-nav-item"><i class="fas fa-volume-up"></i> Speakers</a>
-        <a href="#" onclick="filterByCategory('covers')" class="cat-nav-item"><i class="fas fa-mobile-alt"></i> Covers</a>
-        <a href="#" onclick="filterByCategory('adapters')" class="cat-nav-item"><i class="fas fa-exchange-alt"></i> Adapters</a>
-        <a href="#" onclick="filterByCategory('lights')" class="cat-nav-item"><i class="fas fa-lightbulb"></i> Lights</a>
-        <a href="#" onclick="filterByCategory('keyboards')" class="cat-nav-item"><i class="fas fa-keyboard"></i> Keyboards</a>
-        <a href="#" onclick="filterByCategory('cameras')" class="cat-nav-item"><i class="fas fa-camera"></i> Cameras</a>
-    </div>
-</div></nav>
+function renderProductsList(){var el=document.getElementById('productsListDiv');if(!products.length){el.innerHTML='<div class="empty2"><i class="fas fa-box-open"></i><p>No products</p></div>';return;}el.innerHTML=products.map(function(p){var icon=ICONS[p.category]||'fas fa-box';var catName=NAMES[p.category]||p.category;var tags='';if(p.is_new)tags+='<span class="ptag new">NEW</span> ';if(p.is_hot)tags+='<span class="ptag hot">HOT</span> ';if(p.is_sale)tags+='<span class="ptag sale">SALE</span> ';if(p.is_flash)tags+='<span class="ptag flash">FLASH</span> ';return'<div class="prow"><div class="pimg">'+(p.image?'<img src="'+p.image+'">':'<i class="'+icon+'"></i>')+'</div><div class="pinfo"><h5>'+p.name+'</h5><span>'+catName+' '+tags+'</span></div><div class="pprice">Rs.'+p.price.toLocaleString()+(p.old_price?' <s>Rs.'+p.old_price.toLocaleString()+'</s>':'')+'</div><div class="pstock'+(p.stock<=10?' low':'')+'">'+(p.stock<=0?'❌':p.stock<=10?'⚠️'+p.stock:'✅'+p.stock)+'</div><div class="pacts"><button class="bedit" onclick="editProduct('+p.id+')"><i class="fas fa-edit"></i></button><button class="bdel" onclick="deleteProduct('+p.id+')"><i class="fas fa-trash"></i></button></div></div>';}).join('');}
 
-<button class="mobile-menu-btn" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></button>
+function showAddForm(){editingId=null;document.getElementById('formTitle').textContent='Add Product';document.getElementById('fName').value='';document.getElementById('fCategory').value='chargers';document.getElementById('fPrice').value='';document.getElementById('fOldPrice').value='';document.getElementById('fStock').value='';document.getElementById('fImage').value='';document.getElementById('fDesc').value='';document.getElementById('fIsNew').checked=false;document.getElementById('fIsHot').checked=false;document.getElementById('fIsSale').checked=false;document.getElementById('fIsFlash').checked=false;document.getElementById('productForm').classList.add('show');document.getElementById('productForm').scrollIntoView({behavior:'smooth'});}
+function editProduct(id){var p=products.find(function(x){return x.id===id;});if(!p)return;editingId=id;document.getElementById('formTitle').textContent='Edit: '+p.name;document.getElementById('fName').value=p.name;document.getElementById('fCategory').value=p.category;document.getElementById('fPrice').value=p.price;document.getElementById('fOldPrice').value=p.old_price||'';document.getElementById('fStock').value=p.stock;document.getElementById('fImage').value=p.image||'';document.getElementById('fDesc').value=p.description||'';document.getElementById('fIsNew').checked=p.is_new||false;document.getElementById('fIsHot').checked=p.is_hot||false;document.getElementById('fIsSale').checked=p.is_sale||false;document.getElementById('fIsFlash').checked=p.is_flash||false;document.getElementById('productForm').classList.add('show');document.getElementById('productForm').scrollIntoView({behavior:'smooth'});}
+function hideForm(){document.getElementById('productForm').classList.remove('show');editingId=null;}
+async function saveProduct(){var name=document.getElementById('fName').value.trim(),price=parseInt(document.getElementById('fPrice').value);if(!name){alert('Name required!');return;}if(!price){alert('Price required!');return;}var btn=document.getElementById('saveBtn');btn.disabled=true;btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Saving...';var data={name:name,category:document.getElementById('fCategory').value,price:price,old_price:parseInt(document.getElementById('fOldPrice').value)||0,stock:parseInt(document.getElementById('fStock').value)||0,image:document.getElementById('fImage').value.trim(),description:document.getElementById('fDesc').value.trim(),brand:'Generic',compat:'all',is_new:document.getElementById('fIsNew').checked,is_hot:document.getElementById('fIsHot').checked,is_sale:document.getElementById('fIsSale').checked,is_flash:document.getElementById('fIsFlash').checked};var result;if(editingId){result=await api('PATCH','products','id=eq.'+editingId,data);if(result){showAlert('✅ Updated!');hideForm();await loadAllData();}else alert('Failed!');}else{data.rating=4.0;data.reviews=0;result=await api('POST','products','',data);if(result){showAlert('✅ Added!');hideForm();await loadAllData();}else alert('Failed!');}btn.disabled=false;btn.innerHTML='<i class="fas fa-save"></i> Save';}
+async function deleteProduct(id){var p=products.find(function(x){return x.id===id;});if(!confirm('Delete "'+p.name+'"?'))return;var r=await api('DELETE','products','id=eq.'+id);if(r){showAlert('🗑️ Deleted');await loadAllData();}else alert('Failed!');}
 
-<main>
-<!-- HOME -->
-<div id="homePage" class="page active">
-    <section class="hero">
-        <div class="hero-slider">
-            <div class="hero-slide active"><div class="container"><div class="hero-content"><div class="hero-text">
-                <span class="hero-badge">🔥 Hot Deals</span>
-                <h1>Premium Electronics<br><span>Accessories</span></h1>
-                <p>Best quality at unbeatable prices. COD nationwide!</p>
-                <div class="hero-buttons"><button class="btn-primary" onclick="showPage('shop')"><i class="fas fa-shopping-bag"></i> Shop Now</button><button class="btn-secondary" onclick="scrollToSection('flash-sale')"><i class="fas fa-bolt"></i> Flash Sale</button></div>
-                <div class="hero-features"><span><i class="fas fa-truck"></i> Free Delivery</span><span><i class="fas fa-money-bill-wave"></i> COD</span><span><i class="fas fa-shield-alt"></i> Warranty</span></div>
-            </div><div class="hero-image"><i class="fas fa-headphones" style="font-size:180px;color:rgba(255,255,255,0.15);"></i></div></div></div></div>
-            <div class="hero-slide"><div class="container"><div class="hero-content"><div class="hero-text">
-                <span class="hero-badge">🆕 New</span><h1>Smart Watches<br><span>2025</span></h1><p>From Rs. 2,499!</p>
-                <div class="hero-buttons"><button class="btn-primary" onclick="filterByCategory('watches')"><i class="fas fa-clock"></i> View</button></div>
-            </div><div class="hero-image"><i class="fas fa-clock" style="font-size:180px;color:rgba(255,255,255,0.15);"></i></div></div></div></div>
-            <div class="hero-slide"><div class="container"><div class="hero-content"><div class="hero-text">
-                <span class="hero-badge">💰 Save</span><h1>50% OFF<br><span>Power Banks</span></h1><p>Limited time!</p>
-                <div class="hero-buttons"><button class="btn-primary" onclick="filterByCategory('powerbanks')"><i class="fas fa-battery-full"></i> Shop</button></div>
-            </div><div class="hero-image"><i class="fas fa-battery-full" style="font-size:180px;color:rgba(255,255,255,0.15);"></i></div></div></div></div>
-        </div>
-        <div class="hero-dots"><span class="dot active" onclick="goToSlide(0)"></span><span class="dot" onclick="goToSlide(1)"></span><span class="dot" onclick="goToSlide(2)"></span></div>
-        <button class="hero-arrow left" onclick="prevSlide()"><i class="fas fa-chevron-left"></i></button>
-        <button class="hero-arrow right" onclick="nextSlide()"><i class="fas fa-chevron-right"></i></button>
-    </section>
+function renderCategories(){var cats={};products.forEach(function(p){if(!cats[p.category])cats[p.category]={count:0,stock:0};cats[p.category].count++;cats[p.category].stock+=p.stock;});var keys=Object.keys(cats);if(!keys.length){document.getElementById('categoriesDiv').innerHTML='<div class="empty2"><i class="fas fa-tags"></i><p>No categories</p></div>';return;}document.getElementById('categoriesDiv').innerHTML=keys.map(function(k){var c=cats[k];return'<div class="catcard"><div class="catbadge">'+c.count+'</div><i class="'+(ICONS[k]||'fas fa-box')+'"></i><h5>'+(NAMES[k]||k)+'</h5><span>Stock: '+c.stock+'</span></div>';}).join('');}
 
-    <section class="trust-badges"><div class="container"><div class="badges-grid">
-        <div class="badge-item"><i class="fas fa-truck"></i><div><h4>Free Delivery</h4><p>Over Rs. 2000</p></div></div>
-        <div class="badge-item"><i class="fas fa-money-bill-wave"></i><div><h4>COD</h4><p>Pay on receive</p></div></div>
-        <div class="badge-item"><i class="fas fa-undo"></i><div><h4>7-Day Returns</h4><p>Easy</p></div></div>
-        <div class="badge-item"><i class="fas fa-shield-alt"></i><div><h4>Genuine</h4><p>100%</p></div></div>
-    </div></div></section>
-
-    <section class="section" id="flash-sale"><div class="container">
-        <div class="section-header flash-header"><h2><i class="fas fa-bolt"></i> Flash Sale</h2>
-            <div class="countdown"><div class="count-box"><span id="hours">08</span><small>H</small></div><div class="count-box"><span id="minutes">45</span><small>M</small></div><div class="count-box"><span id="seconds">30</span><small>S</small></div></div>
-        </div>
-        <div class="products-grid" id="flashSaleProducts"></div>
-    </div></section>
-
-    <section class="section"><div class="container">
-        <div class="section-header"><h2><i class="fas fa-star"></i> Featured</h2><a href="#" onclick="showPage('shop')">All <i class="fas fa-arrow-right"></i></a></div>
-        <div class="products-grid" id="featuredProducts"></div>
-    </div></section>
-
-    <section class="section"><div class="container">
-        <div class="section-header"><h2><i class="fas fa-fire"></i> New Arrivals</h2><a href="#" onclick="showPage('shop')">All <i class="fas fa-arrow-right"></i></a></div>
-        <div class="products-grid" id="newArrivals"></div>
-    </div></section>
-
-    <section class="section"><div class="container">
-        <div class="section-header"><h2><i class="fas fa-trophy"></i> Best Sellers</h2><a href="#" onclick="showPage('shop')">All <i class="fas fa-arrow-right"></i></a></div>
-        <div class="products-grid" id="bestSellers"></div>
-    </div></section>
-</div>
-
-<!-- SHOP -->
-<div id="shopPage" class="page"><div class="container">
-    <div class="shop-header">
-        <div class="breadcrumb"><a href="#" onclick="showPage('home')">Home</a> / <span id="shopBreadcrumb">All Products</span></div>
-        <div class="shop-controls"><span id="productCount">0</span> Products
-            <select id="sortSelect" onchange="sortProducts()"><option value="default">Default</option><option value="price-low">Price ↑</option><option value="price-high">Price ↓</option><option value="newest">Newest</option></select>
-        </div>
-    </div>
-    <div class="products-grid" id="shopProducts"></div>
-</div></div>
-
-<!-- ABOUT -->
-<div id="aboutPage" class="page"><div class="container"><div class="info-page"><h1><i class="fas fa-store"></i> About ElectroHub</h1><div class="info-content"><p><strong>ElectroHub</strong> — Pakistan's electronics store!</p><div class="about-features"><div class="about-feature"><i class="fas fa-check-circle"></i><div><h4>Genuine</h4><p>Authorized products</p></div></div><div class="about-feature"><i class="fas fa-truck"></i><div><h4>Nationwide</h4><p>All Pakistan</p></div></div><div class="about-feature"><i class="fas fa-money-bill-wave"></i><div><h4>COD</h4><p>Pay on receive</p></div></div><div class="about-feature"><i class="fas fa-headset"></i><div><h4>24/7 Support</h4><p>Always here</p></div></div></div></div></div></div></div>
-
-<!-- CONTACT -->
-<div id="contactPage" class="page"><div class="container"><div class="info-page"><h1><i class="fas fa-envelope"></i> Contact</h1><div class="contact-grid"><div class="contact-info"><div class="contact-item"><i class="fas fa-phone-alt"></i><div><h4>Phone</h4><p>+92 300 1234567</p></div></div><div class="contact-item"><i class="fas fa-envelope"></i><div><h4>Email</h4><p>info@electrohub.pk</p></div></div><div class="contact-item"><i class="fas fa-map-marker-alt"></i><div><h4>Address</h4><p>Abbottabad, Pakistan</p></div></div><div class="contact-social"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-whatsapp"></i></a></div></div><div class="contact-form-box"><h3>Message</h3><form onsubmit="event.preventDefault();alert('Thanks!');this.reset();"><div class="form-group"><label>Name</label><input type="text" required></div><div class="form-group"><label>Email</label><input type="email" required></div><div class="form-group"><label>Message</label><textarea required rows="4"></textarea></div><button type="submit" class="btn-primary"><i class="fas fa-paper-plane"></i> Send</button></form></div></div></div></div></div>
-
-</main>
-
-<!-- FOOTER -->
-<footer class="footer"><div class="container">
-    <div class="footer-grid">
-        <div class="footer-col"><div class="footer-logo"><i class="fas fa-bolt"></i><span>Electro<strong>Hub</strong></span></div><p>Premium accessories. COD nationwide.</p></div>
-        <div class="footer-col"><h4>Links</h4><ul><li><a href="#" onclick="showPage('home')">Home</a></li><li><a href="#" onclick="showPage('shop')">Shop</a></li><li><a href="#" onclick="showPage('about')">About</a></li><li><a href="#" onclick="openTrackingModal()">Track Order</a></li></ul></div>
-        <div class="footer-col"><h4>Categories</h4><ul><li><a href="#" onclick="filterByCategory('chargers')">Chargers</a></li><li><a href="#" onclick="filterByCategory('earphones')">Earphones</a></li><li><a href="#" onclick="filterByCategory('watches')">Watches</a></li><li><a href="#" onclick="filterByCategory('powerbanks')">Power Banks</a></li><li><a href="#" onclick="filterByCategory('speakers')">Speakers</a></li></ul></div>
-        <div class="footer-col"><h4>Contact</h4><ul class="contact-list"><li><i class="fas fa-phone-alt"></i> +92 300 1234567</li><li><i class="fas fa-envelope"></i> info@electrohub.pk</li></ul></div>
-    </div>
-    <div class="footer-bottom"><p>&copy; 2025 ElectroHub</p></div>
-</div></footer>
-
-<a href="https://wa.me/923001234567" target="_blank" class="whatsapp-btn"><i class="fab fa-whatsapp"></i></a>
-<button class="scroll-top" id="scrollTop" onclick="scrollToTop()"><i class="fas fa-arrow-up"></i></button>
-
-<script src="script.js"></script>
+function renderCustomers(custs){custs=custs||[];var el=document.getElementById('customersDiv');if(!custs.length){el.innerHTML='<div class="empty2"><i class="fas fa-users"></i><p>No customers</p></div>';return;}el.innerHTML=custs.map(function(c){var myOrders=orders.filter(function(o){return o.customer_phone===c.phone;});var ts=0;myOrders.forEach(function(o){if(o.status!=='Cancelled')ts+=o.total;});return'<div class="orow"><div class="orowh"><h5><i class="fas fa-user-check" style="color:var(--s);margin-right:4px;"></i>'+c.name+'</h5><span class="ototal">Rs.'+ts.toLocaleString()+'</span></div><div class="orowb"><span>Phone<strong>'+c.phone+'</strong></span><span>Email<strong>'+(c.email||'N/A')+'</strong></span><span>City<strong>'+(c.city||'N/A')+'</strong></span><span>Address<strong>'+(c.address||'').substring(0,35)+'</strong></span><span>Orders<strong>'+myOrders.length+'</strong></span><span>Joined<strong>'+timeAgo(c.created_at)+'</strong></span></div></div>';}).join('');}
+</script>
 </body>
 </html>
