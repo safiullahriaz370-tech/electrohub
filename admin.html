@@ -130,34 +130,41 @@
         .s-Cancelled{background:#F8D7DA;color:#721C24}
         .ssel{padding:5px 10px;border:1px solid var(--g);border-radius:6px;font-size:11px;outline:none;cursor:pointer}
 
-        /* PRODUCT ROW */
-        .prow{background:var(--w);padding:8px 10px;border-radius:8px;display:flex;align-items:center;gap:8px;margin-bottom:6px;border:1px solid var(--g);transition:var(--tr);font-size:11px}
-        .prow:hover{box-shadow:0 2px 6px rgba(0,0,0,0.04)}
-        .pimg{width:34px;height:34px;background:var(--lg);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden}
-        .pimg img{max-width:100%;max-height:100%;object-fit:contain}
-        .pimg i{color:var(--g);font-size:13px}
-        .pinfo{flex:1;min-width:0}
-        .pinfo h5{font-size:11px;margin-bottom:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-        .pinfo span{font-size:9px;color:var(--mg);display:flex;align-items:center;gap:2px;flex-wrap:wrap}
-        .ptag{font-size:8px;padding:1px 3px;border-radius:2px;font-weight:600}
-        .ptag.new{background:#D4EDDA;color:#155724}
-        .ptag.hot{background:var(--pl);color:var(--p)}
-        .ptag.sale{background:#F8D7DA;color:#721C24}
-        .ptag.flash{background:#CCE5FF;color:#004085}
-        .pprice{font-weight:700;color:var(--p);min-width:65px;font-size:11px;text-align:right}
-        .pprice s{color:var(--mg);font-weight:400;font-size:9px;margin-left:2px}
-        .pstock{min-width:50px;font-size:10px;text-align:center}
-        .pstock.low{color:var(--dn);font-weight:600}
-        .pacts{display:flex;gap:3px}
-        .pacts button{width:26px;height:26px;border:none;border-radius:5px;cursor:pointer;font-size:10px;display:flex;align-items:center;justify-content:center;transition:var(--tr)}
-        .bedit{background:#D1ECF1;color:#0C5460}
-        .bedit:hover{background:var(--i);color:white}
-        .bdel{background:#F8D7DA;color:#721C24}
-        .bdel:hover{background:var(--dn);color:white}
+     /* PRODUCT ROW */
+.prow{background:#fff;padding:12px 14px;border-radius:8px;display:flex;align-items:center;gap:12px;margin-bottom:8px;border:1px solid #E5E5E5;font-size:12px}
+.prow:hover{box-shadow:0 2px 8px rgba(0,0,0,0.06)}
+.pimg{width:45px;height:45px;background:#F8F8F8;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden}
+.pimg img{max-width:100%;max-height:100%;object-fit:contain}
+.pimg i{color:#E5E5E5;font-size:16px}
+.pinfo{flex:1;min-width:0;overflow:hidden}
+.pinfo h5{font-size:13px;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pinfo span{font-size:11px;color:#999;display:flex;align-items:center;gap:3px;flex-wrap:wrap}
+.ptag{font-size:9px;padding:2px 5px;border-radius:3px;font-weight:600}
+.pprice{font-weight:700;color:#FF7A00;min-width:75px;font-size:13px;text-align:right;white-space:nowrap}
+.pprice s{color:#999;font-weight:400;font-size:10px;margin-left:3px}
+.pstock{min-width:55px;font-size:11px;text-align:center;white-space:nowrap}
+.pstock.low{color:#dc3545;font-weight:600}
+.pacts{display:flex;gap:4px;flex-shrink:0}
+.pacts button{width:28px;height:28px;border:none;border-radius:6px;cursor:pointer;font-size:11px;display:flex;align-items:center;justify-content:center}
 
-        /* ADD BUTTON */
-        .badd{padding:7px 14px;background:var(--p);color:white;border:none;border-radius:8px;font-weight:600;cursor:pointer;font-size:11px;display:flex;align-items:center;gap:4px;transition:var(--tr)}
-        .badd:hover{background:var(--pd)}
+/* ADD BUTTON */
+.badd{padding:8px 16px;background:#FF7A00;color:#fff;border:none;border-radius:7px;font-weight:600;cursor:pointer;font-size:12px;display:flex;align-items:center;gap:5px}
+
+/* FORM */
+.pform{background:#fff;padding:18px;border-radius:10px;margin-bottom:14px;display:none;border:2px solid #FFF3E6}
+.pform.show{display:block;animation:fadeIn 0.3s}
+.pform h4{font-size:15px;color:#FF7A00;margin-bottom:12px;padding-bottom:7px;border-bottom:2px solid #FFF3E6}
+.fgrp label{font-size:11px}
+.fgrp input,.fgrp select,.fgrp textarea{padding:9px 10px;font-size:12px}
+.checkrow{padding:8px;gap:14px}
+.chkitem{font-size:12px}
+.chkitem input{width:15px;height:15px}
+.fbtnrow{gap:8px}
+.bsave{padding:9px 20px;font-size:12px}
+.bcancel{padding:9px 20px;font-size:12px}
+
+/* TAB HEADER */
+.tabheader h4{font-size:15px}
 
         /* FORM */
         .pform{background:var(--w);padding:16px;border-radius:10px;margin-bottom:14px;display:none;animation:fadeIn 0.3s;border:2px solid var(--pl)}
